@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: employee-service
+  datasource:
+    url: jdbc:sqlserver://localhost;databaseName=demo2;trustServerCertificate=true
+    username: sa
+    password: E@MC2kien
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.SQLServer2012Dialect
+server:
+  port: 0
