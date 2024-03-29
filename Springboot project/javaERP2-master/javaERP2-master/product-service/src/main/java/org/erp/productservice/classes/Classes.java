@@ -1,4 +1,4 @@
-package org.erp.productservice.Classes;
+package org.erp.productservice.classes;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

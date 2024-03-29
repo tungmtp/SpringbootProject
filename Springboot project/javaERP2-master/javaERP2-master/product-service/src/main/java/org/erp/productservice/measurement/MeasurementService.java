@@ -44,6 +44,9 @@ public class MeasurementService {
             if (Measurement.getWidth() != currentMeasurement.getWidth()) {
                 currentMeasurement.setWidth(Measurement.getWidth());
             }
+            if (Measurement.getHeight() != currentMeasurement.getHeight()) {
+                currentMeasurement.setHeight(Measurement.getHeight());
+            }
             if (Measurement.getUPC() != currentMeasurement.getUPC()) {
                 currentMeasurement.setUPC(Measurement.getUPC());
             }

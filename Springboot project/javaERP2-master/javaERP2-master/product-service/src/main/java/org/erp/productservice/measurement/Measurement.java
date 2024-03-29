@@ -30,6 +30,8 @@ public class Measurement {
     private float Length;
     @Column(name = "Width", columnDefinition = "float")
     private float Width;
+    @Column(name = "Height", columnDefinition = "float")
+    private float Height;
     @Column(name = "UPC", columnDefinition = "int")
     private int UPC;
 

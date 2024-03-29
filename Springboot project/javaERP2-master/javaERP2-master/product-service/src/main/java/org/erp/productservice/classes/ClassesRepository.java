@@ -1,4 +1,4 @@
-package org.erp.productservice.Classes;
+package org.erp.productservice.classes;
 
 //import org.erp.employeeservice.department.Department;
 import org.springframework.data.jpa.repository.JpaRepository;
