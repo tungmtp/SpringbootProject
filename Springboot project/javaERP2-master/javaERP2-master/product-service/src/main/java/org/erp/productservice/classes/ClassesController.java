@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/product-service/Classes")
+@RequestMapping("/product-service/classes")
 public class ClassesController {
     @Autowired
     private ClassesService ClassesService;

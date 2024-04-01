@@ -18,7 +18,7 @@ public class Classes {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID Id;
 
-    @Column(name = "NameStr", columnDefinition = "nvarchar(256)")
+    @Column(name = "nameStr", columnDefinition = "nvarchar(256)")
     private String NameStr;
 
     @Column(name = "classType", columnDefinition = "varchar(10)")
