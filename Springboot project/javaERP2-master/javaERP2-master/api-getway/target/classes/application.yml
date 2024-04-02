@@ -13,6 +13,10 @@ spring:
             uri: lb://product-service
             predicates:
               - Path=/product-service/**
+          - id: produce-service
+            uri: lb://produce-service
+            predicates:
+              - Path=/produce-service/**
   datasource:
     url: jdbc:sqlserver://localhost;databaseName=demo2;trustServerCertificate=true
     username: sa
