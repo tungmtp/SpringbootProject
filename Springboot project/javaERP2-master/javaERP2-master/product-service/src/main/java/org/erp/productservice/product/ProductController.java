@@ -17,6 +17,10 @@ public class ProductController {
     public ResponseEntity<List<Product>> getAllProduct() {
         return new ResponseEntity<List<Product>>(ProductService.allProduct(), HttpStatus.OK);
     }
+    @GetMapping("/byCategoryID/{id}")
+    public ResponseEntity<List<Product>> getAllProductByExtraCategoryID(@PathVariable UUID id) {
+        return new ResponseEntity<List<Product>>(ProductService.getProductsByExtraCategoryID(id), HttpStatus.OK);
+    }
     @GetMapping("/{id}")
     public ResponseEntity<Product> getSingleProduct(@PathVariable UUID id) {
         return new ResponseEntity<Product>(ProductService.singleProduct(id), HttpStatus.OK);
