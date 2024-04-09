@@ -18,15 +18,14 @@ public class ProductRelation {
     private UUID Id;
 
     @Column(name = "RelTable", columnDefinition = "nvarchar(255)")
-    private String RelTable;
-
-    @Column(name = "RelId", columnDefinition = "nvarchar(255)")
-    private String RelId;
-
+    private String relTable;
+    @Column(name = "ProductId")
+    private UUID productId;
+    @Column(name = "RelId")
+    private UUID relId;
     @Column(name = "RelType", columnDefinition = "nvarchar(255)")
-    private String RelType;
-
+    private String relType;
     @Column(name = "RelData", columnDefinition = "nvarchar(4000)")
-    private String RelData;
+    private String relData;
 
 }

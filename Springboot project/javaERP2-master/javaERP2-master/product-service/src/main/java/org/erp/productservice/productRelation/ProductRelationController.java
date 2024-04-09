@@ -18,6 +18,10 @@ public class ProductRelationController {
     public ResponseEntity<List<ProductRelation>> getAllProductRelation() {
         return new ResponseEntity<List<ProductRelation>>(ProductRelationService.allProductRelation(), HttpStatus.OK);
     }
+    @GetMapping("/byProductID/{id}")
+    public ResponseEntity<List<ProductRelation>> getProductRelationByProductId(@PathVariable UUID id) {
+        return new ResponseEntity<List<ProductRelation>>(ProductRelationService.getProductRelationByProductId(id), HttpStatus.OK);
+    }
     @GetMapping("/{id}")
     public ResponseEntity<ProductRelation> getSingleProductRelation(@PathVariable UUID id) {
         return new ResponseEntity<ProductRelation>(ProductRelationService.singleProductRelation(id), HttpStatus.OK);
