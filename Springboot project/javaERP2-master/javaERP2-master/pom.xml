@@ -20,6 +20,7 @@
       <module>api-getway</module>
     <module>product-service</module>
       <module>produce-service</module>
+      <module>business-service</module>
 
   </modules>
 
