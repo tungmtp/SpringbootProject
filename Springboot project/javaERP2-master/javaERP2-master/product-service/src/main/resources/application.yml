@@ -2,9 +2,9 @@ spring:
   application:
     name: product-service
   datasource:
-    url: jdbc:sqlserver://localhost;databaseName=demo2;trustServerCertificate=true
+    url: jdbc:sqlserver://localhost:1499;databaseName=demo2;trustServerCertificate=true
     username: sa
-    password: E@MC2kien
+    password: E=MC2kien0101535971
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 
   jpa:
