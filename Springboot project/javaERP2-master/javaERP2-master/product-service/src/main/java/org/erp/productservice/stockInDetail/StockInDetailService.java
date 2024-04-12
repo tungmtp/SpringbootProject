@@ -26,18 +26,18 @@ public class StockInDetailService {
         StockInDetail currentStockInDetail = stockInDetailRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy chi tiết phiếu nhập kho này"));
             // Kiểm tra và cập nhật stockInId
-            if (!Objects.equals(newStockInDetail.getStockInId(), currentStockInDetail.getStockInId())) {
-                currentStockInDetail.setStockInId(newStockInDetail.getStockInId());
+            if (!Objects.equals(newStockInDetail.getStockInID(), currentStockInDetail.getStockInID())) {
+                currentStockInDetail.setStockInID(newStockInDetail.getStockInID());
             }
 
             // Kiểm tra và cập nhật productId
-            if (!Objects.equals(newStockInDetail.getProductId(), currentStockInDetail.getProductId())) {
-                currentStockInDetail.setProductId(newStockInDetail.getProductId());
+            if (!Objects.equals(newStockInDetail.getProductID(), currentStockInDetail.getProductID())) {
+                currentStockInDetail.setProductID(newStockInDetail.getProductID());
             }
 
             // Kiểm tra và cập nhật messageId
-            if (!Objects.equals(newStockInDetail.getMessageId(), currentStockInDetail.getMessageId())) {
-                currentStockInDetail.setMessageId(newStockInDetail.getMessageId());
+            if (!Objects.equals(newStockInDetail.getMeasID(), currentStockInDetail.getMeasID())) {
+                currentStockInDetail.setMeasID(newStockInDetail.getMeasID());
             }
 
             // Kiểm tra và cập nhật quality
@@ -56,8 +56,8 @@ public class StockInDetailService {
             }
 
             // Kiểm tra và cập nhật relatedId
-            if (!Objects.equals(newStockInDetail.getRelatedId(), currentStockInDetail.getRelatedId())) {
-                currentStockInDetail.setRelatedId(newStockInDetail.getRelatedId());
+            if (!Objects.equals(newStockInDetail.getRelatedID(), currentStockInDetail.getRelatedID())) {
+                currentStockInDetail.setRelatedID(newStockInDetail.getRelatedID());
             }
 
             // Kiểm tra và cập nhật createdBy

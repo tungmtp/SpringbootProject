@@ -1,4 +1,4 @@
-package org.erp.productservice.stockInDetail;
+package org.erp.productservice.stockOutDetail;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,13 +13,13 @@ import java.util.UUID;
 @NoArgsConstructor
 @Setter
 @Getter
-public class StockInDetail {
+public class StockOutDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "stockInID", nullable = false)
-    private UUID stockInID;
+    @Column(name = "stockOutID", nullable = false)
+    private UUID stockOutID;
 
     @Column(name = "productID", nullable = false)
     private UUID productID;
@@ -54,12 +54,5 @@ public class StockInDetail {
     @Column(name = "priceType", columnDefinition = "tinyint")
     private Byte priceType;
 
-    @Column(name = "importTax")
-    private Float importTax;
 
-    @Column(name = "currency", length = 10)
-    private String currency;
-
-    @Column(name = "rate")
-    private Float rate;
 }

@@ -16,7 +16,6 @@ import java.util.UUID;
 public class StockOut {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "ID", nullable = false) // ID là khóa chính và không được null
     private UUID id;
 
     @Column(name = "slipDate", nullable = false)
@@ -52,6 +51,6 @@ public class StockOut {
     @Column(name = "Noidung", columnDefinition = "nvarchar(256)")
     private String noidung;
 
-    @Column(name = "warehouselD", nullable = false)
+    @Column(name = "warehouseID", nullable = false)
     private UUID warehouseID;
 }
