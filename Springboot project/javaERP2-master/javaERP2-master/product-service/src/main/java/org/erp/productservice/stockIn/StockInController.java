@@ -26,13 +26,13 @@ public class StockInController {
     }
 
     @PostMapping
-    public ResponseEntity<StockIn> createStockIn(@RequestBody StockIn ProductRelation) {
-        return new ResponseEntity<StockIn>(StockInService.createStockIn(ProductRelation), HttpStatus.CREATED);
+    public ResponseEntity<StockIn> createStockIn(@RequestBody StockIn StockIn) {
+        return new ResponseEntity<StockIn>(StockInService.createStockIn(StockIn), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<StockIn> updateStockIn(@PathVariable UUID id, @RequestBody StockIn ProductRelation) {
-        return new ResponseEntity<StockIn>(StockInService.updateStockIn(id, ProductRelation), HttpStatus.OK);
+    public ResponseEntity<StockIn> updateStockIn(@PathVariable UUID id, @RequestBody StockIn StockIn) {
+        return new ResponseEntity<StockIn>(StockInService.updateStockIn(id, StockIn), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
