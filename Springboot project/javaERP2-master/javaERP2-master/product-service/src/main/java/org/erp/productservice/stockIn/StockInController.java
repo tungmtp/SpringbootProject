@@ -16,10 +16,6 @@ public class StockInController {
     public ResponseEntity<List<StockIn>> getAllStockIn() {
         return new ResponseEntity<List<StockIn>>(StockInService.getAllStockIns(), HttpStatus.OK);
     }
-    @GetMapping("/byProductID/{id}")
-    public ResponseEntity<StockIn>getStockInByProductId(@PathVariable UUID id) {
-        return new ResponseEntity<StockIn>(StockInService.getStockInById(id), HttpStatus.OK);
-    }
     @GetMapping("/{id}")
     public ResponseEntity<StockIn> getSingleStockIn(@PathVariable UUID id) {
         return new ResponseEntity<StockIn>(StockInService.getStockInById(id), HttpStatus.OK);
