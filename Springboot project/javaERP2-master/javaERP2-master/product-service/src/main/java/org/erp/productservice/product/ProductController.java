@@ -1,5 +1,6 @@
 package org.erp.productservice.product;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,9 @@ import java.util.UUID;
 public class ProductController {
     @Autowired
     private ProductService ProductService;
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
     @GetMapping
     public ResponseEntity<List<Product>> getAllProduct() {
         return new ResponseEntity<List<Product>>(ProductService.allProduct(), HttpStatus.OK);
@@ -28,7 +32,9 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestBody Product Product) {
-        return new ResponseEntity<Product>(ProductService.createProduct(Product), HttpStatus.CREATED);
+        ResponseEntity<Product> response = new ResponseEntity<Product>(ProductService.createProduct(Product), HttpStatus.CREATED);
+        rabbitTemplate.convertAndSend("javaguides_exchange", "javaguides_routing_key", response);
+        return response;
     }
 
     @PutMapping("/{id}")
