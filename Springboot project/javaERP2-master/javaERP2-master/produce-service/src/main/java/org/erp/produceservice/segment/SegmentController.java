@@ -1,5 +1,6 @@
 package org.erp.produceservice.segment;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,16 +14,8 @@ import java.util.UUID;
 public class SegmentController {
     @Autowired
     private SegmentService segmentService;
-
-    public SegmentController(SegmentService segmentService) {
-        this.segmentService = segmentService;
-    }
-
-    @GetMapping("/publish")
-    public ResponseEntity<String> sendMessage(@RequestParam("message") String message) {
-        segmentService.sendMessage(message);
-        return ResponseEntity.ok("Message sent to RabbitMQ ...");
-    }
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @GetMapping
     public ResponseEntity<List<Segment>> getAllSegment() {
@@ -35,18 +28,17 @@ public class SegmentController {
 
     @PostMapping
     public ResponseEntity<Segment> createSegment(@RequestBody Segment Segment) {
-        return new ResponseEntity<Segment>(segmentService.createSegment(Segment), HttpStatus.CREATED);
+        ResponseEntity<Segment> response = new ResponseEntity<Segment>(segmentService.createSegment(Segment), HttpStatus.CREATED);
+        rabbitTemplate.convertAndSend("javaguides_exchange", "javaguides_routing_key", response);
+        return  response;
     }
-
     @PutMapping("/{id}")
     public ResponseEntity<Segment> updateSegment(@PathVariable UUID id, @RequestBody Segment Segment) {
         return new ResponseEntity<Segment>(segmentService.updateSegment(id, Segment), HttpStatus.OK);
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteClassPrice(@PathVariable UUID id) {
         segmentService.deleteSegment(id);
         return ResponseEntity.ok().build();
     }
-
 }

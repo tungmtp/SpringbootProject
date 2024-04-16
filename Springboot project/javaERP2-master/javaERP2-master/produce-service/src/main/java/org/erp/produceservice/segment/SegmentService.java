@@ -23,10 +23,10 @@ public class SegmentService {
     public SegmentService(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
-    public void sendMessage (String message){
-        LOGGER.info(String.format("Message sent -> %s", message));
-//        rabbitTemplate.convertAndSend("javaguides_exchange", "javaguides_routing_key", message);
-    }
+//    public void sendMessage (String message){
+//        LOGGER.info(String.format("Message sent -> %s", message));
+////        rabbitTemplate.convertAndSend("javaguides_exchange", "javaguides_routing_key", message);
+//    }
     @Autowired
     private SegmentRepository SegmentRepository;
 
@@ -39,7 +39,7 @@ public class SegmentService {
     }
 
     public Segment createSegment(Segment Segment) {
-        rabbitTemplate.convertAndSend("javaguides_exchange", "javaguides_routing_key", Segment);
+//        rabbitTemplate.convertAndSend("javaguides_exchange", "javaguides_routing_key", Segment);
         return SegmentRepository.save(Segment);
     }
 

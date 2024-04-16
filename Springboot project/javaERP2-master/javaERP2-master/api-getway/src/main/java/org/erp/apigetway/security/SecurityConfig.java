@@ -47,7 +47,7 @@ public class SecurityConfig {
 //                .build();
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authCustomizer -> authCustomizer
-                        .requestMatchers("/auth/addUser", "/auth/generateToken","/produce-service/segment/publish").permitAll()
+                        .requestMatchers("/auth/addUser", "/auth/generateToken","/rabbitMQ/events").permitAll()
                         .requestMatchers("/**").authenticated()
                 )
                 .sessionManagement((sessionManagement) -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
