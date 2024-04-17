@@ -2,6 +2,7 @@ package org.erp.produceservice.segment;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,9 +29,17 @@ public class SegmentController {
 
     @PostMapping
     public ResponseEntity<Segment> createSegment(@RequestBody Segment Segment) {
-        ResponseEntity<Segment> response = new ResponseEntity<Segment>(segmentService.createSegment(Segment), HttpStatus.CREATED);
+        Segment createdProduct = segmentService.createSegment(Segment);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("RequestType", "ADD_SEGMENT");
+        ResponseEntity<Segment> response = ResponseEntity.status(HttpStatus.CREATED)
+                .headers(headers)
+                .body(createdProduct);
+
+        // Gửi message đến RabbitMQ
         rabbitTemplate.convertAndSend("javaguides_exchange", "javaguides_routing_key", response);
-        return  response;
+
+        return response;
     }
     @PutMapping("/{id}")
     public ResponseEntity<Segment> updateSegment(@PathVariable UUID id, @RequestBody Segment Segment) {

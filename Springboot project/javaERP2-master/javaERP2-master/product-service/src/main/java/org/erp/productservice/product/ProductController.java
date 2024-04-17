@@ -2,6 +2,7 @@ package org.erp.productservice.product;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,9 +32,17 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody Product Product) {
-        ResponseEntity<Product> response = new ResponseEntity<Product>(ProductService.createProduct(Product), HttpStatus.CREATED);
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+        Product createdProduct = ProductService.createProduct(product);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("RequestType", "ADD_PRODUCT");
+        ResponseEntity<Product> response = ResponseEntity.status(HttpStatus.CREATED)
+                .headers(headers)
+                .body(createdProduct);
+
+        // Gửi message đến RabbitMQ
         rabbitTemplate.convertAndSend("javaguides_exchange", "javaguides_routing_key", response);
+
         return response;
     }
 
