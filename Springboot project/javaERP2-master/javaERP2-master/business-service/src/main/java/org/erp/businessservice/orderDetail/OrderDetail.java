@@ -39,7 +39,7 @@ public class OrderDetail {
     private float importTax;
     @Column(name = "rate", columnDefinition = "float")
     private float rate;
-    @Column(name = "currency", columnDefinition = "varchar(10)")
+    @Column(name = "currency", columnDefinition = "nvarchar(10)")
     private String currency;
 
 

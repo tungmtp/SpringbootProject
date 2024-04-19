@@ -18,7 +18,7 @@ public class Partner {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "nameStr", nullable = false, length = 256)
+    @Column(name = "nameStr", nullable = false, columnDefinition = "nvarchar(250)")
     private String nameStr;
 
     @Column(name = "partnerType", nullable = false)
@@ -27,12 +27,12 @@ public class Partner {
     @Column(name = "detail", columnDefinition = "TEXT")
     private String detail;
 
-    @Column(name = "address", length = 256)
+    @Column(name = "address", columnDefinition = "nvarchar(250)")
     private String address;
 
-    @Column(name = "VATid", length = 256)
+    @Column(name = "VATid",columnDefinition = "nvarchar(250)")
     private String VATid;
 
-    @Column(name = "warehouseAddress", length = 256)
+    @Column(name = "warehouseAddress", columnDefinition = "nvarchar(250)")
     private String warehouseAddress;
 }

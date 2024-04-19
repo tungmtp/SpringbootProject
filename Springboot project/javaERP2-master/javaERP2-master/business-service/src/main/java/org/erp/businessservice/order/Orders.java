@@ -42,13 +42,13 @@ public class Orders {
     @Column(name = "contactID")
     private UUID contactID;
 
-    @Column(name = "staffControl", length = 16)
+    @Column(name = "staffControl", columnDefinition = "nvarchar(16)")
     private String staffControl;
 
     @Column(name = "complete", nullable = false)
     private boolean complete;
 
-    @Column(name = "createdBy", nullable = false, length = 16)
+    @Column(name = "createdBy", nullable = false, columnDefinition = "nvarchar(16)")
     private String createdBy;
 
     @Column(name = "createdOn", nullable = false)
@@ -57,12 +57,12 @@ public class Orders {
     @Column(name = "calcType")
     private int calcType;
 
-    @Column(name = "lotNo", length = 50)
+    @Column(name = "lotNo", columnDefinition = "nvarchar(50)")
     private String lotNo;
 
     @Column(name = "projectitemID")
     private UUID projectitemID;
 
-    @Column(name = "editBy", length = 16)
+    @Column(name = "editBy", columnDefinition = "nvarchar(16)")
     private String editBy;
 }

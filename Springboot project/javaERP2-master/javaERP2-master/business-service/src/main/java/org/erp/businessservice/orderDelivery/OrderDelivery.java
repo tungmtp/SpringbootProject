@@ -32,7 +32,7 @@ public class OrderDelivery {
     @Column(name = "warehouseID", nullable = false)
     private UUID warehouseID;
 
-    @Column(name = "createdBy", nullable = false, length = 16)
+    @Column(name = "createdBy", nullable = false, columnDefinition = "nvarchar(16)")
     private String createdBy;
 
     @Column(name = "createdOn", nullable = false)

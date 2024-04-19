@@ -21,15 +21,15 @@ public class Contact {
     @Column(name = "partnersID", nullable = false)
     private UUID partnersID;
 
-    @Column(name = "nameStr", nullable = false, length = 256)
+    @Column(name = "nameStr", nullable = false, columnDefinition = "nvarchar(250)")
     private String nameStr;
 
-    @Column(name = "email", length = 128)
+    @Column(name = "email", columnDefinition = "nvarchar(250)")
     private String email;
 
-    @Column(name = "handPhone", length = 50)
+    @Column(name = "handPhone", columnDefinition = "nvarchar(50)")
     private String handPhone;
 
-    @Column(name = "Title", length = 256)
+    @Column(name = "Title", columnDefinition = "nvarchar(256)")
     private String title;
 }
