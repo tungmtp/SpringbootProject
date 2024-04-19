@@ -4,6 +4,7 @@ package org.erp.businessservice.order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 @Service
@@ -15,6 +16,9 @@ public class OrdersService {
         return orderRepository.findAll();
     }
 
+    public List<Orders> getOrdersByOrderDate(Date orderDate) {
+        return orderRepository.findByOrderDate(orderDate);
+    }
     public Orders getOrderById(UUID id) {
         return orderRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Order not found with id: " + id));

@@ -1,10 +1,12 @@
 package org.erp.businessservice.order;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,6 +18,12 @@ public class OrdersController {
     @GetMapping
     public ResponseEntity<List<Orders>> getAllOrder() {
         return new ResponseEntity<List<Orders>>(OrderService.getAllOrders(), HttpStatus.OK);
+    }
+    @GetMapping("/byOrderDate")
+    public ResponseEntity<List<Orders>> getOrdersByOrderDate(
+            @RequestParam("orderDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date orderDate) {
+        List<Orders> orders = OrderService.getOrdersByOrderDate(orderDate);
+        return new ResponseEntity<>(orders, HttpStatus.OK);
     }
     @GetMapping("/{id}")
     public ResponseEntity<Orders> getSingleOrder(@PathVariable UUID id) {
