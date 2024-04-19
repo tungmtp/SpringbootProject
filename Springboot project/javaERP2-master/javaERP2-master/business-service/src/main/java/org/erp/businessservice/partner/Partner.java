@@ -30,8 +30,8 @@ public class Partner {
     @Column(name = "address", length = 256)
     private String address;
 
-    @Column(name = "VATid")
-    private UUID VATid;
+    @Column(name = "VATid", length = 256)
+    private String VATid;
 
     @Column(name = "warehouseAddress", length = 256)
     private String warehouseAddress;
