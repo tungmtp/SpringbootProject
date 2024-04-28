@@ -52,7 +52,7 @@ public class SegmentService {
             if ((Segment.getProductGroup() != null) && (!"".equalsIgnoreCase(Segment.getProductGroup()))) {
                 currentSegment.setProductGroup(Segment.getProductGroup());
             }
-            if (Segment.getOrderLevel() != currentSegment.getOrderLevel()) {
+            if ((Segment.getOrderLevel() != 0) && Segment.getOrderLevel() != currentSegment.getOrderLevel()) {
                 currentSegment.setOrderLevel(Segment.getOrderLevel());
             }
             if (Segment.getSubCATID() != currentSegment.getSubCATID()) {
@@ -67,7 +67,8 @@ public class SegmentService {
         return null;
     }
 
-    public void deleteSegment(UUID id) {
+    public UUID deleteSegment(UUID id) {
         SegmentRepository.deleteById(id);
+        return id;
     }
 }

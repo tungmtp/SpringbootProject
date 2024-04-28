@@ -43,11 +43,31 @@ public class SegmentController {
     }
     @PutMapping("/{id}")
     public ResponseEntity<Segment> updateSegment(@PathVariable UUID id, @RequestBody Segment Segment) {
-        return new ResponseEntity<Segment>(segmentService.updateSegment(id, Segment), HttpStatus.OK);
+//        return new ResponseEntity<Segment>(segmentService.updateSegment(id, Segment), HttpStatus.OK);
+        Segment updatedProduct = segmentService.updateSegment(id, Segment);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("RequestType", "UPDATE_SEGMENT");
+        ResponseEntity<Segment> response = ResponseEntity.status(HttpStatus.OK)
+                .headers(headers)
+                .body(updatedProduct);
+
+        // Gửi message đến RabbitMQ
+        rabbitTemplate.convertAndSend("javaguides_exchange", "javaguides_routing_key", response);
+        return response;
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteClassPrice(@PathVariable UUID id) {
-        segmentService.deleteSegment(id);
-        return ResponseEntity.ok().build();
+//        segmentService.deleteSegment(id);
+//        return ResponseEntity.ok().build();
+        UUID deletedProduct = segmentService.deleteSegment(id);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("RequestType", "DELETE_SEGMENT");
+        ResponseEntity<UUID> response = ResponseEntity.status(HttpStatus.OK)
+                .headers(headers)
+                .body(deletedProduct);
+
+        // Gửi message đến RabbitMQ
+        rabbitTemplate.convertAndSend("javaguides_exchange", "javaguides_routing_key", response);
+        return response;
     }
 }
