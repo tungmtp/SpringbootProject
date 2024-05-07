@@ -1,12 +1,15 @@
 package org.erp.productservice.product;
 
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.UUID;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ProductService {
     @Autowired
@@ -80,5 +83,18 @@ public class ProductService {
 
     public void deleteProduct(UUID id) {
         ProductRepository.deleteById(id);
+    }
+
+    public List<ProductForSelect> searchProductContainName(String name) { //Kien
+        return ProductRepository.getProductContainingQuery(name);
+    }
+
+    @Transactional
+    public List<ProductForSelect> getProductFirstCall(UUID productID) {
+        //@Transactional
+        List<Object[]> results = ProductRepository.getProductFirstCall(productID);
+        return results.stream()
+                .map(result -> new ProductForSelect(UUID.fromString((String) result[0]), (String) result[1]))
+                .collect(Collectors.toList());
     }
 }
