@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -29,8 +27,8 @@ public class Segment {
     private UUID subCATID;
     @Column(name = "skipCalendar")
     private boolean skipCalendar = false;
-
-
+    @Column(name = "Prefix", columnDefinition = "varchar(50)")
+    private String Prefix;
 
 }
 

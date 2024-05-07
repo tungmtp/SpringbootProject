@@ -50,4 +50,8 @@ public class ContactService {
     public void deleteContact(UUID id) {
         contactRepository.deleteById(id);
     }
+
+    public List<Contact> selectContactByPartner(UUID partnerId) {
+        return contactRepository.selectContactByPartner(partnerId);
+    }
 }

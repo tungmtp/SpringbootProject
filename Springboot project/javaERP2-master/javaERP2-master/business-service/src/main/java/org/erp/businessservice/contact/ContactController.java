@@ -38,4 +38,9 @@ public class ContactController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("byPartner/{partnerId}")
+    public ResponseEntity<List<Contact>> selectContactByPartner(@PathVariable UUID partnerId) {
+        return new ResponseEntity<List<Contact>>(contactService.selectContactByPartner(partnerId), HttpStatus.OK);
+    }
+
 }

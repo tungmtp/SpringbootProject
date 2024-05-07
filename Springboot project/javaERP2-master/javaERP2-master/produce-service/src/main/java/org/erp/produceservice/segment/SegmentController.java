@@ -19,34 +19,39 @@ public class SegmentController {
     private RabbitTemplate rabbitTemplate;
 
     @GetMapping
-    public ResponseEntity<List<Segment>> getAllSegment() {
+    public ResponseEntity<List<Segment>> getAllSegment(@RequestHeader("UserName") String userName) {
+        System.out.println("UserName: " + userName);
         return new ResponseEntity<List<Segment>>(segmentService.allSegment(), HttpStatus.OK);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Segment> getSingleSegment(@PathVariable UUID id) {
         return new ResponseEntity<Segment>(segmentService.singleSegment(id), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Segment> createSegment(@RequestBody Segment Segment) {
+    public ResponseEntity<Segment> createSegment(@RequestBody Segment Segment, @RequestHeader("UserName") String userName) {
         Segment createdProduct = segmentService.createSegment(Segment);
         HttpHeaders headers = new HttpHeaders();
         headers.add("RequestType", "ADD_SEGMENT");
+        headers.add("UserName", userName);
         ResponseEntity<Segment> response = ResponseEntity.status(HttpStatus.CREATED)
                 .headers(headers)
                 .body(createdProduct);
-
+        System.out.println("UserName: " + userName);
         // Gửi message đến RabbitMQ
         rabbitTemplate.convertAndSend("javaguides_exchange", "javaguides_routing_key", response);
 
         return response;
     }
+
     @PutMapping("/{id}")
-    public ResponseEntity<Segment> updateSegment(@PathVariable UUID id, @RequestBody Segment Segment) {
+    public ResponseEntity<Segment> updateSegment(@PathVariable UUID id, @RequestBody Segment Segment, @RequestHeader("UserName") String userName) {
 //        return new ResponseEntity<Segment>(segmentService.updateSegment(id, Segment), HttpStatus.OK);
         Segment updatedProduct = segmentService.updateSegment(id, Segment);
         HttpHeaders headers = new HttpHeaders();
         headers.add("RequestType", "UPDATE_SEGMENT");
+        headers.add("UserName", userName);
         ResponseEntity<Segment> response = ResponseEntity.status(HttpStatus.OK)
                 .headers(headers)
                 .body(updatedProduct);
@@ -55,13 +60,15 @@ public class SegmentController {
         rabbitTemplate.convertAndSend("javaguides_exchange", "javaguides_routing_key", response);
         return response;
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteClassPrice(@PathVariable UUID id) {
+    public ResponseEntity<?> deleteClassPrice(@PathVariable UUID id, @RequestHeader("UserName") String userName) {
 //        segmentService.deleteSegment(id);
 //        return ResponseEntity.ok().build();
         UUID deletedProduct = segmentService.deleteSegment(id);
         HttpHeaders headers = new HttpHeaders();
         headers.add("RequestType", "DELETE_SEGMENT");
+        headers.add("UserName", userName);
         ResponseEntity<UUID> response = ResponseEntity.status(HttpStatus.OK)
                 .headers(headers)
                 .body(deletedProduct);
