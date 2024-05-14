@@ -1,5 +1,7 @@
 package org.erp.productservice.classes;
 
+import org.erp.productservice.measurement.Measurement;
+import org.erp.productservice.measurement.MeasurementForSelect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +15,12 @@ import java.util.UUID;
 public class ClassesController {
     @Autowired
     private ClassesService ClassesService;
+
     @GetMapping
     public ResponseEntity<List<Classes>> getAllClasses() {
         return new ResponseEntity<List<Classes>>(ClassesService.allClasses(), HttpStatus.OK);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Classes> getSingleClass(@PathVariable UUID id) {
         return new ResponseEntity<Classes>(ClassesService.singleClass(id), HttpStatus.OK);
@@ -38,4 +42,20 @@ public class ClassesController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/byNameStr/{query}")
+    public ResponseEntity<List<ClassForSelect>> getMeasurementContainingQuery(@PathVariable String query) {
+        return new ResponseEntity<List<ClassForSelect>>(ClassesService.getMeasurementContainingQuery(query), HttpStatus.OK);
+    }
+
+    @GetMapping("/firstCall/{id}") //Kien
+    public ResponseEntity<List<ClassForSelect>> getMeasurementFamiliar(@PathVariable UUID id) {
+        return new ResponseEntity<List<ClassForSelect>>(ClassesService.getMeasurementFamiliar(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/oneForSelect/{id}")
+    public ResponseEntity<ClassForSelect> oneForSelect(@PathVariable UUID id) {
+        Classes xmeas = ClassesService.singleClass(id);
+        ClassForSelect ymeas = new ClassForSelect(xmeas.getId(), xmeas.getNameStr());
+        return new ResponseEntity<ClassForSelect>(ymeas, HttpStatus.OK);
+    }
 }

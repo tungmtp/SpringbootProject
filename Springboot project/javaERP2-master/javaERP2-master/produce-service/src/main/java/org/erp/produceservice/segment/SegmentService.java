@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+
 @Service
 public class SegmentService {
 //    @Value("${rabbitmq.exchange.name}")
@@ -23,7 +24,8 @@ public class SegmentService {
     public SegmentService(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
-//    public void sendMessage (String message){
+
+    //    public void sendMessage (String message){
 //        LOGGER.info(String.format("Message sent -> %s", message));
 ////        rabbitTemplate.convertAndSend("javaguides_exchange", "javaguides_routing_key", message);
 //    }
@@ -70,5 +72,13 @@ public class SegmentService {
     public UUID deleteSegment(UUID id) {
         SegmentRepository.deleteById(id);
         return id;
+    }
+
+    public List<SegmentForSelect> getItemContainingQuery(String query) {
+        return SegmentRepository.getItemContainingQuery(query);
+    }
+
+    public List<SegmentForSelect> getItemFamiliar() {
+        return SegmentRepository.getItemFamiliar();
     }
 }

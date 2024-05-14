@@ -19,12 +19,10 @@ public class Classes {
     private UUID Id;
 
     @Column(name = "nameStr", columnDefinition = "nvarchar(256)")
-    private String NameStr;
+    private String nameStr;
 
     @Column(name = "classType", columnDefinition = "varchar(10)")
     private String classType;
-
-
 
 
 }

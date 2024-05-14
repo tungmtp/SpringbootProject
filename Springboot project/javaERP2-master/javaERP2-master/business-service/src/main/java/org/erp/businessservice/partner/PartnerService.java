@@ -1,5 +1,6 @@
 package org.erp.businessservice.partner;
 
+import com.fasterxml.jackson.databind.ser.std.UUIDSerializer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,5 +53,13 @@ public class PartnerService {
 
     public void deletePartner(UUID id) {
         partnerRepository.deleteById(id);
+    }
+
+    public List<PartnerForSelect> getItemContainingQuery(String query) {
+        return partnerRepository.getItemContainingQuery(query);
+    }
+
+    public List<PartnerForSelect> getItemFamiliar(UUID uuid) {
+        return partnerRepository.getItemFamiliar(uuid);
     }
 }

@@ -77,4 +77,21 @@ public class SegmentController {
         rabbitTemplate.convertAndSend("javaguides_exchange", "javaguides_routing_key", response);
         return response;
     }
+
+    @GetMapping("/byNameStr/{query}")
+    public ResponseEntity<List<SegmentForSelect>> getItemContainingQuery(@PathVariable String query) {
+        return new ResponseEntity<List<SegmentForSelect>>(segmentService.getItemContainingQuery(query), HttpStatus.OK);
+    }
+
+    @GetMapping("/firstCall/{id}")
+    public ResponseEntity<List<SegmentForSelect>> getItemFamiliar() {
+        return new ResponseEntity<List<SegmentForSelect>>(segmentService.getItemFamiliar(), HttpStatus.OK);
+    }
+
+    @GetMapping("/oneForSelect/{id}")
+    public ResponseEntity<SegmentForSelect> oneForSelect(@PathVariable UUID id) {
+        Segment xmeas = segmentService.singleSegment(id);
+        SegmentForSelect ymeas = new SegmentForSelect(xmeas.getId(), xmeas.getSegmentName());
+        return new ResponseEntity<SegmentForSelect>(ymeas, HttpStatus.OK);
+    }
 }

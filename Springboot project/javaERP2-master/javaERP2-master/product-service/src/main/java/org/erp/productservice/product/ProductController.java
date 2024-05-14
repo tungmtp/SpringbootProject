@@ -22,6 +22,7 @@ public class ProductController {
     public ResponseEntity<List<Product>> getAllProduct() {
         return new ResponseEntity<List<Product>>(ProductService.allProduct(), HttpStatus.OK);
     }
+
     @GetMapping("/byCategoryID/{id}")
     public ResponseEntity<List<Product>> getAllProductByExtraCategoryID(@PathVariable UUID id) {
         return new ResponseEntity<List<Product>>(ProductService.getProductsByExtraCategoryID(id), HttpStatus.OK);
@@ -36,6 +37,12 @@ public class ProductController {
     public ResponseEntity<List<ProductForSelect>> getProductFirstCall(@PathVariable UUID id) {
         return new ResponseEntity<List<ProductForSelect>>(ProductService.getProductFirstCall(id), HttpStatus.OK);
     }
+
+    @GetMapping("/oneForSelect/{id}")
+    public ResponseEntity<Product> getSelectedItem(@PathVariable UUID id) {
+        return new ResponseEntity<Product>(ProductService.singleProduct(id), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Product> getSingleProduct(@PathVariable UUID id) {
         return new ResponseEntity<Product>(ProductService.singleProduct(id), HttpStatus.OK);
@@ -57,7 +64,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable UUID id,@RequestBody Product Product) {
+    public ResponseEntity<Product> updateProduct(@PathVariable UUID id, @RequestBody Product Product) {
         return new ResponseEntity<Product>(ProductService.updateProduct(id, Product), HttpStatus.OK);
     }
 

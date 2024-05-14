@@ -13,10 +13,12 @@ import java.util.UUID;
 public class PartnerController {
     @Autowired
     private PartnerService partnerService;
+
     @GetMapping
     public ResponseEntity<List<Partner>> getPartner() {
         return new ResponseEntity<List<Partner>>(partnerService.getAllPartners(), HttpStatus.OK);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Partner> getSinglePartner(@PathVariable UUID id) {
         return new ResponseEntity<Partner>(partnerService.getPartnerById(id), HttpStatus.OK);
@@ -36,6 +38,23 @@ public class PartnerController {
     public ResponseEntity<?> deletePartner(@PathVariable UUID id) {
         partnerService.deletePartner(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/byNameStr/{query}")
+    public ResponseEntity<List<PartnerForSelect>> getItemContainingQuery(@PathVariable String query) {
+        return new ResponseEntity<List<PartnerForSelect>>(partnerService.getItemContainingQuery(query), HttpStatus.OK);
+    }
+
+    @GetMapping("/firstCall/{id}")
+    public ResponseEntity<List<PartnerForSelect>> getItemFamiliar(@PathVariable UUID id) {
+        return new ResponseEntity<List<PartnerForSelect>>(partnerService.getItemFamiliar(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/oneForSelect/{id}")
+    public ResponseEntity<PartnerForSelect> oneForSelect(@PathVariable UUID id) {
+        Partner xmeas = partnerService.getPartnerById(id);
+        PartnerForSelect ymeas = new PartnerForSelect(xmeas.getId(), xmeas.getNameStr());
+        return new ResponseEntity<PartnerForSelect>(ymeas, HttpStatus.OK);
     }
 
 }

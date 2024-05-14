@@ -29,7 +29,7 @@ public class Measurement {
     @Column(name = "Length", columnDefinition = "float")
     private float Length;
     @Column(name = "Width", columnDefinition = "float")
-    private float Width;
+    private Double Width;
     @Column(name = "Height", columnDefinition = "float")
     private float Height;
     @Column(name = "UPC", columnDefinition = "int")

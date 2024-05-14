@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+
 @Service
 public class MeasurementService {
     @Autowired
@@ -41,7 +42,7 @@ public class MeasurementService {
             if (Measurement.getLength() != currentMeasurement.getLength()) {
                 currentMeasurement.setLength(Measurement.getLength());
             }
-            if (Measurement.getWidth() != currentMeasurement.getWidth()) {
+            if (!Measurement.getWidth().equals(currentMeasurement.getWidth())) {
                 currentMeasurement.setWidth(Measurement.getWidth());
             }
             if (Measurement.getHeight() != currentMeasurement.getHeight()) {
@@ -57,5 +58,13 @@ public class MeasurementService {
 
     public void deleteMeasurement(UUID id) {
         MeasurementRepository.deleteById(id);
+    }
+
+    public List<MeasurementForSelect> getMeasurementContainingQuery(String query) {
+        return MeasurementRepository.getMeasurementContainingQuery(query);
+    }
+
+    public List<MeasurementForSelect> getMeasurementFamiliar(UUID measID) {
+        return MeasurementRepository.getMeasurementFamiliar(measID);
     }
 }
