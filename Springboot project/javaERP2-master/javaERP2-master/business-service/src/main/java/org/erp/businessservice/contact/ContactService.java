@@ -1,5 +1,6 @@
 package org.erp.businessservice.contact;
 
+import org.erp.businessservice.partner.PartnerForSelect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class ContactService {
         Contact existingContact = contactRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Contact not found with id: " + id));
 
-        if ( contact.getPartnersID() != null &&!contact.getPartnersID().equals(existingContact.getPartnersID())) {
+        if (contact.getPartnersID() != null && !contact.getPartnersID().equals(existingContact.getPartnersID())) {
             existingContact.setPartnersID(contact.getPartnersID());
         }
         if (contact.getNameStr() != null && !contact.getNameStr().equals(existingContact.getNameStr())) {
@@ -53,5 +54,13 @@ public class ContactService {
 
     public List<Contact> selectContactByPartner(UUID partnerId) {
         return contactRepository.selectContactByPartner(partnerId);
+    }
+
+    public List<ContactForSelect> getItemContainingQuery(String query) {
+        return contactRepository.getItemContainingQuery(query);
+    }
+
+    public List<ContactForSelect> getItemFamiliar(UUID id) {
+        return contactRepository.getItemFamiliar(id);
     }
 }

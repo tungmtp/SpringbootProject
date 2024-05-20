@@ -45,23 +45,23 @@ public class SegmentService {
         return SegmentRepository.save(Segment);
     }
 
-    public Segment updateSegment(UUID id, Segment Segment) {
+    public Segment updateSegment(UUID id, Segment segment) {
         Segment currentSegment = SegmentRepository.findById(id).orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm này"));
         if (currentSegment != null) {
-            if ((Segment.getSegmentName() != null) && (!"".equalsIgnoreCase(Segment.getSegmentName()))) {
-                currentSegment.setSegmentName(Segment.getSegmentName());
+            if ((segment.getSegmentName() != null) && (!"".equalsIgnoreCase(segment.getSegmentName()))) {
+                currentSegment.setSegmentName(segment.getSegmentName());
             }
-            if ((Segment.getProductGroup() != null) && (!"".equalsIgnoreCase(Segment.getProductGroup()))) {
-                currentSegment.setProductGroup(Segment.getProductGroup());
+            if ((segment.getProductGroup() != null) && (!"".equalsIgnoreCase(segment.getProductGroup()))) {
+                currentSegment.setProductGroup(segment.getProductGroup());
             }
-            if ((Segment.getOrderLevel() != 0) && Segment.getOrderLevel() != currentSegment.getOrderLevel()) {
-                currentSegment.setOrderLevel(Segment.getOrderLevel());
+            if ((segment.getOrderLevel() != 0) && segment.getOrderLevel() != currentSegment.getOrderLevel()) {
+                currentSegment.setOrderLevel(segment.getOrderLevel());
             }
-            if (Segment.getSubCATID() != currentSegment.getSubCATID()) {
-                currentSegment.setSubCATID(Segment.getSubCATID());
+            if (segment.getSubCATID() != currentSegment.getSubCATID()) {
+                currentSegment.setSubCATID(segment.getSubCATID());
             }
-            if (Segment.isSkipCalendar() != currentSegment.isSkipCalendar()) {
-                currentSegment.setSkipCalendar(Segment.isSkipCalendar());
+            if (segment.isSkipCalendar() != currentSegment.isSkipCalendar()) {
+                currentSegment.setSkipCalendar(segment.isSkipCalendar());
             }
 
             return SegmentRepository.save(currentSegment);

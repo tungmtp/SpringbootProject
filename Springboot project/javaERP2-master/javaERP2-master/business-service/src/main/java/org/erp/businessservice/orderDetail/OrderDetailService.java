@@ -1,11 +1,14 @@
 package org.erp.businessservice.orderDetail;
 
 
+import org.erp.businessservice.order.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
 @Service
 public class OrderDetailService {
     @Autowired
@@ -69,5 +72,9 @@ public class OrderDetailService {
 
     public void deleteOrdersDetail(UUID id) {
         OrderDetailRepository.deleteById(id);
+    }
+
+    public List<OrderDetail> getOrdersByOrderID(UUID orderID) {
+        return OrderDetailRepository.findByOrderID(orderID);
     }
 }

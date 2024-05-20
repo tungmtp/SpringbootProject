@@ -5,7 +5,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,26 +12,27 @@ import java.util.stream.Collectors;
 @Service
 public class ProductService {
     @Autowired
-    private ProductRepository ProductRepository;
+    private ProductRepository productRepository;
 
     public List<Product> allProduct() {
-        return ProductRepository.findAll();
+        return productRepository.findAll();
     }
+
     public List<Product> getProductsByExtraCategoryID(UUID extraCategoryID) {
-        return ProductRepository.findByExtraCategoryID(extraCategoryID);
+        return productRepository.findByExtraCategoryID(extraCategoryID);
     }
 
     public Product singleProduct(UUID id) {
-        return ProductRepository.findById(id).orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm này"));
+        return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm này"));
     }
 
     public Product createProduct(Product Product) {
-        return ProductRepository.save(Product);
+        return productRepository.save(Product);
     }
 
 
     public Product updateProduct(UUID id, Product newProductData) {
-        Product currentProduct = ProductRepository.findById(id)
+        Product currentProduct = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm này"));
 
         if (newProductData.getNameStr() != null && !newProductData.getNameStr().isEmpty()) {
@@ -78,23 +78,58 @@ public class ProductService {
             currentProduct.setCreatedOn(newProductData.getCreatedOn());
         }
 
-        return ProductRepository.save(currentProduct);
+        return productRepository.save(currentProduct);
     }
 
     public void deleteProduct(UUID id) {
-        ProductRepository.deleteById(id);
+        productRepository.deleteById(id);
     }
 
-    public List<ProductForSelect> searchProductContainName(String name) { //Kien
-        return ProductRepository.getProductContainingQuery(name);
+    public List<ProductForSelect> getProductContainingName(String name) { //Kien
+        return productRepository.getProductContainingName(name);
     }
 
     @Transactional
     public List<ProductForSelect> getProductFirstCall(UUID productID) {
         //@Transactional
-        List<Object[]> results = ProductRepository.getProductFirstCall(productID);
+        List<Object[]> results = productRepository.getProductFirstCall(productID);
         return results.stream()
                 .map(result -> new ProductForSelect(UUID.fromString((String) result[0]), (String) result[1]))
                 .collect(Collectors.toList());
     }
+
+    public List<ProductForSelect> getProductMayBeSellContainingName(String name) { //Kien
+        return productRepository.getProductMayBeSellContainingName(name);
+    }
+
+    public List<ProductForSelect> getProductMayBeSellFirstCall(UUID id) {
+        return productRepository.getProductMaBeSellFirstCall(id);
+    }
+
+    public List<org.erp.productservice.product.ProductWithMeasurement> getSingleProductWithMeasurement(UUID id) {
+        return productRepository.getProductWithMeasurement(id);
+    }
+
+    public List<ProductForSelect> getProductMayBeProduceContainingName(String name) {
+        List<Object[]> results = productRepository.getProductMayBeProduceContainingName(name);
+        return results.stream()
+                .map(result -> new ProductForSelect(UUID.fromString((String) result[0]), (String) result[1]))
+                .collect(Collectors.toList());
+    }
+
+    public List<ProductForSelect> getProductMayBeProduceFirstCall(UUID uuid) {
+        List<Object[]> results = productRepository.getProductMayBeProduceFirstCall(uuid);
+        return results.stream()
+                .map(result -> new ProductForSelect(UUID.fromString((String) result[0]), (String) result[1]))
+                .collect(Collectors.toList());
+    }
+
+    public List<ProductBom> getProductMayBeProduce() {
+        List<Object[]> results = productRepository.getProductMayBeProduce();
+        return results.stream()
+                .map(result -> new ProductBom(UUID.fromString((String) result[0]), (String) result[1], (int) result[2]))
+                .collect(Collectors.toList());
+    }
+
+
 }

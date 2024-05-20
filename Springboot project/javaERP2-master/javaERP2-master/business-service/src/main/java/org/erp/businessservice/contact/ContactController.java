@@ -1,5 +1,7 @@
 package org.erp.businessservice.contact;
 
+import org.erp.businessservice.partner.Partner;
+import org.erp.businessservice.partner.PartnerForSelect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,10 +15,12 @@ import java.util.UUID;
 public class ContactController {
     @Autowired
     private ContactService contactService;
+
     @GetMapping
     public ResponseEntity<List<Contact>> getContact() {
         return new ResponseEntity<List<Contact>>(contactService.getAllContacts(), HttpStatus.OK);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Contact> getSingleContact(@PathVariable UUID id) {
         return new ResponseEntity<Contact>(contactService.getContactById(id), HttpStatus.OK);
@@ -43,4 +47,20 @@ public class ContactController {
         return new ResponseEntity<List<Contact>>(contactService.selectContactByPartner(partnerId), HttpStatus.OK);
     }
 
+    @GetMapping("/byNameStr/{query}")
+    public ResponseEntity<List<ContactForSelect>> getItemContainingQuery(@PathVariable String query) {
+        return new ResponseEntity<List<ContactForSelect>>(contactService.getItemContainingQuery(query), HttpStatus.OK);
+    }
+
+    @GetMapping("/firstCall/{id}")
+    public ResponseEntity<List<ContactForSelect>> getItemFamiliar(@PathVariable UUID id) {
+        return new ResponseEntity<List<ContactForSelect>>(contactService.getItemFamiliar(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/oneForSelect/{id}")
+    public ResponseEntity<ContactForSelect> oneForSelect(@PathVariable UUID id) {
+        Contact xmeas = contactService.getContactById(id);
+        ContactForSelect ymeas = new ContactForSelect(xmeas.getId(), xmeas.getNameStr());
+        return new ResponseEntity<ContactForSelect>(ymeas, HttpStatus.OK);
+    }
 }
