@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+
 @Service
 public class OrderDeliveryDetailService {
     @Autowired
@@ -43,8 +44,8 @@ public class OrderDeliveryDetailService {
         if (orderDeliveryDetail.getQuantity() != existingOrderDeliveryDetail.getQuantity()) {
             existingOrderDeliveryDetail.setQuantity(orderDeliveryDetail.getQuantity());
         }
-        if (!orderDeliveryDetail.getMessID().equals(existingOrderDeliveryDetail.getMessID())) {
-            existingOrderDeliveryDetail.setMessID(orderDeliveryDetail.getMessID());
+        if (!orderDeliveryDetail.getMeasID().equals(existingOrderDeliveryDetail.getMeasID())) {
+            existingOrderDeliveryDetail.setMeasID(orderDeliveryDetail.getMeasID());
         }
         if (orderDeliveryDetail.getPrice() != null && !orderDeliveryDetail.getPrice().equals(existingOrderDeliveryDetail.getPrice())) {
             existingOrderDeliveryDetail.setPrice(orderDeliveryDetail.getPrice());

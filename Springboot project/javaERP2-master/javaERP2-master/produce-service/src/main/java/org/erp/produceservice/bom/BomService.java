@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class BomService {
@@ -50,4 +51,18 @@ public class BomService {
     public List<Bom> getBomByProductId(UUID uuid) {
         return bomRepository.findByProductId(uuid);
     }
+
+    public List<BomInputByBomId> getInputByBomId(UUID bomId) {
+        List<Object[]> results = bomRepository.getInputOfBomId(bomId);
+        return results.stream().map(result -> new BomInputByBomId(
+                UUID.fromString((String) result[0]),
+                UUID.fromString((String) result[1]),
+                UUID.fromString((String) result[2]),
+                UUID.fromString((String) result[3]),
+                (Double) result[4],
+                (String) result[5],
+                (String) result[6]
+        )).collect(Collectors.toList());
+    }
+
 }

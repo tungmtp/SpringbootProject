@@ -19,8 +19,8 @@ public class OrderDelivery {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "ordersID", nullable = false)
-    private UUID ordersID;
+    @Column(name = "orderID", nullable = false)
+    private UUID orderID;
 
     @Column(name = "deliveryDate", nullable = false)
     @Temporal(TemporalType.DATE)
@@ -30,14 +30,14 @@ public class OrderDelivery {
     private String deliveryAddress;
 
     @Column(name = "warehouseID", nullable = false)
-    private UUID warehouseID;
+    private int warehouseID;
 
     @Column(name = "createdBy", nullable = false, columnDefinition = "nvarchar(16)")
     private String createdBy;
 
     @Column(name = "createdOn", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createdOn;
+    private Date createdOn = new Date();
 
     @Column(name = "cancel", nullable = false)
     private boolean cancel;

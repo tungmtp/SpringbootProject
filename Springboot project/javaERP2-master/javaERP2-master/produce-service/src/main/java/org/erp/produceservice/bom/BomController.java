@@ -33,4 +33,9 @@ public class BomController {
     public ResponseEntity<List<Bom>> findBomByProductId(@PathVariable("id") UUID id) {
         return new ResponseEntity<List<Bom>>(bomService.getBomByProductId(id), HttpStatus.OK);
     }
+
+    @GetMapping("/input/{id}")
+    public ResponseEntity<List<BomInputByBomId>> getInputByBomId(@PathVariable UUID id) {
+        return new ResponseEntity<List<BomInputByBomId>>(bomService.getInputByBomId(id), HttpStatus.OK);
+    }
 }

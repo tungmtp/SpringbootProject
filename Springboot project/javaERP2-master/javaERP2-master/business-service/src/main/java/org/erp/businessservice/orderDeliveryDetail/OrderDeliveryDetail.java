@@ -33,8 +33,8 @@ public class OrderDeliveryDetail {
     @Column(name = "quantity", nullable = false)
     private float quantity;
 
-    @Column(name = "messID", nullable = false)
-    private UUID messID;
+    @Column(name = "measID", nullable = false)
+    private UUID measID;
 
     @Column(name = "price")
     private Float price;

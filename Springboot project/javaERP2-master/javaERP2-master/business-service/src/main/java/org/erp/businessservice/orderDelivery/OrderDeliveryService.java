@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+
 @Service
 public class OrderDeliveryService {
     @Autowired
@@ -28,8 +29,8 @@ public class OrderDeliveryService {
         OrderDelivery existingOrderDelivery = orderDeliveryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("OrderDelivery not found with id: " + id));
 
-        if (!orderDelivery.getOrdersID().equals(existingOrderDelivery.getOrdersID())) {
-            existingOrderDelivery.setOrdersID(orderDelivery.getOrdersID());
+        if (!orderDelivery.getOrderID().equals(existingOrderDelivery.getOrderID())) {
+            existingOrderDelivery.setOrderID(orderDelivery.getOrderID());
         }
         if (!orderDelivery.getDeliveryDate().equals(existingOrderDelivery.getDeliveryDate())) {
             existingOrderDelivery.setDeliveryDate(orderDelivery.getDeliveryDate());
@@ -37,7 +38,7 @@ public class OrderDeliveryService {
         if (orderDelivery.getDeliveryAddress() != null && !orderDelivery.getDeliveryAddress().equals(existingOrderDelivery.getDeliveryAddress())) {
             existingOrderDelivery.setDeliveryAddress(orderDelivery.getDeliveryAddress());
         }
-        if (!orderDelivery.getWarehouseID().equals(existingOrderDelivery.getWarehouseID())) {
+        if (orderDelivery.getWarehouseID() != (existingOrderDelivery.getWarehouseID())) {
             existingOrderDelivery.setWarehouseID(orderDelivery.getWarehouseID());
         }
         if (!orderDelivery.getCreatedBy().equals(existingOrderDelivery.getCreatedBy())) {
