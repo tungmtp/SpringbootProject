@@ -18,11 +18,11 @@ public class OrderDeliveryDetail {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "ordersDeliveryID", nullable = false)
-    private UUID ordersDeliveryID;
+    @Column(name = "orderDeliveryID", nullable = false)
+    private UUID orderDeliveryID;
 
-    @Column(name = "ordersDetailID", nullable = false)
-    private UUID ordersDetailID;
+    @Column(name = "orderDetailID", nullable = false)
+    private UUID orderDetailID;
 
     @Column(name = "productID", nullable = false)
     private UUID productID;
@@ -31,7 +31,7 @@ public class OrderDeliveryDetail {
     private short quality;
 
     @Column(name = "quantity", nullable = false)
-    private float quantity;
+    private Float quantity;
 
     @Column(name = "measID", nullable = false)
     private UUID measID;

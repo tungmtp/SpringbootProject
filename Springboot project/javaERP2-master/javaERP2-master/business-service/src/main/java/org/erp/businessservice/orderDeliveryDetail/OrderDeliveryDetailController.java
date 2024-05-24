@@ -13,10 +13,12 @@ import java.util.UUID;
 public class OrderDeliveryDetailController {
     @Autowired
     private OrderDeliveryDetailService OrderDeliveryDetailService;
+
     @GetMapping
     public ResponseEntity<List<OrderDeliveryDetail>> getAllOrderDeliveryDetail() {
         return new ResponseEntity<List<OrderDeliveryDetail>>(OrderDeliveryDetailService.getAllOrderDeliveryDetails(), HttpStatus.OK);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<OrderDeliveryDetail> getSingleOrderDeliveryDetail(@PathVariable UUID id) {
         return new ResponseEntity<OrderDeliveryDetail>(OrderDeliveryDetailService.getOrderDeliveryDetailById(id), HttpStatus.OK);
@@ -36,6 +38,12 @@ public class OrderDeliveryDetailController {
     public ResponseEntity<?> deleteOrderDeliveryDetail(@PathVariable UUID id) {
         OrderDeliveryDetailService.deleteOrderDeliveryDetail(id);
         return ResponseEntity.ok().build();
+    }
+
+    //////
+    @GetMapping("/byOrderDeliveryID/{orderDeliveryID}")
+    public ResponseEntity<List<OrderDeliveryDetail>> getByOrderDeliveryID(@PathVariable UUID orderDeliveryID) {
+        return new ResponseEntity<List<OrderDeliveryDetail>>(OrderDeliveryDetailService.getByOrderDeliveryID(orderDeliveryID), HttpStatus.OK);
     }
 
 }

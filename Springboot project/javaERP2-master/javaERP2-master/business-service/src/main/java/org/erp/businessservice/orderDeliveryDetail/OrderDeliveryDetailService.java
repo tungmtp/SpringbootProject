@@ -29,11 +29,11 @@ public class OrderDeliveryDetailService {
         OrderDeliveryDetail existingOrderDeliveryDetail = orderDeliveryDetailRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("OrderDeliveryDetail not found with id: " + id));
 
-        if (!orderDeliveryDetail.getOrdersDeliveryID().equals(existingOrderDeliveryDetail.getOrdersDeliveryID())) {
-            existingOrderDeliveryDetail.setOrdersDeliveryID(orderDeliveryDetail.getOrdersDeliveryID());
+        if (!orderDeliveryDetail.getOrderDeliveryID().equals(existingOrderDeliveryDetail.getOrderDeliveryID())) {
+            existingOrderDeliveryDetail.setOrderDeliveryID(orderDeliveryDetail.getOrderDeliveryID());
         }
-        if (!orderDeliveryDetail.getOrdersDetailID().equals(existingOrderDeliveryDetail.getOrdersDetailID())) {
-            existingOrderDeliveryDetail.setOrdersDetailID(orderDeliveryDetail.getOrdersDetailID());
+        if (!orderDeliveryDetail.getOrderDetailID().equals(existingOrderDeliveryDetail.getOrderDetailID())) {
+            existingOrderDeliveryDetail.setOrderDetailID(orderDeliveryDetail.getOrderDetailID());
         }
         if (!orderDeliveryDetail.getProductID().equals(existingOrderDeliveryDetail.getProductID())) {
             existingOrderDeliveryDetail.setProductID(orderDeliveryDetail.getProductID());
@@ -41,7 +41,7 @@ public class OrderDeliveryDetailService {
         if (orderDeliveryDetail.getQuality() != existingOrderDeliveryDetail.getQuality()) {
             existingOrderDeliveryDetail.setQuality(orderDeliveryDetail.getQuality());
         }
-        if (orderDeliveryDetail.getQuantity() != existingOrderDeliveryDetail.getQuantity()) {
+        if (orderDeliveryDetail.getQuantity() != null && !orderDeliveryDetail.getQuantity().equals(existingOrderDeliveryDetail.getQuantity())) {
             existingOrderDeliveryDetail.setQuantity(orderDeliveryDetail.getQuantity());
         }
         if (!orderDeliveryDetail.getMeasID().equals(existingOrderDeliveryDetail.getMeasID())) {
@@ -59,5 +59,10 @@ public class OrderDeliveryDetailService {
 
     public void deleteOrderDeliveryDetail(UUID id) {
         orderDeliveryDetailRepository.deleteById(id);
+    }
+
+    public List<OrderDeliveryDetail> getByOrderDeliveryID(UUID orderDeliveryID) {
+        return orderDeliveryDetailRepository.findByOrderDeliveryID(orderDeliveryID);
+
     }
 }
