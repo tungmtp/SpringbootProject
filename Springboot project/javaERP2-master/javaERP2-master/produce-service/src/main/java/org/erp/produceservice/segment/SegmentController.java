@@ -80,7 +80,11 @@ public class SegmentController {
 
     @GetMapping("/byNameStr/{query}")
     public ResponseEntity<List<SegmentForSelect>> getItemContainingQuery(@PathVariable String query) {
-        return new ResponseEntity<List<SegmentForSelect>>(segmentService.getItemContainingQuery(query), HttpStatus.OK);
+        if ("all".equalsIgnoreCase(query)) {
+            return new ResponseEntity<List<SegmentForSelect>>(segmentService.getItemFamiliar(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<List<SegmentForSelect>>(segmentService.getItemContainingQuery(query), HttpStatus.OK);
+        }
     }
 
     @GetMapping("/firstCall/{id}")

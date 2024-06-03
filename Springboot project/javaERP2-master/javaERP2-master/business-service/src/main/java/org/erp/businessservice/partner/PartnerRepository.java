@@ -15,4 +15,7 @@ public interface PartnerRepository extends JpaRepository<Partner, UUID> {
 
     @Query(value = "SELECT new org.erp.businessservice.partner.PartnerForSelect(Id, nameStr) FROM Partner WHERE partnerType = (SELECT partnerType FROM Partner WHERE Id = :query)")
     List<PartnerForSelect> getItemFamiliar(@Param("query") UUID query);
+
+    @Query(value = "SELECT new org.erp.businessservice.partner.PartnerForSelect(Id, nameStr) FROM Partner")
+    List<PartnerForSelect> getAllItemForSelect();
 }

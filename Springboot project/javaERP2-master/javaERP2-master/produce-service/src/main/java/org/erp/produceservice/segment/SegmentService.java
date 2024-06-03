@@ -81,4 +81,5 @@ public class SegmentService {
     public List<SegmentForSelect> getItemFamiliar() {
         return SegmentRepository.getItemFamiliar();
     }
+
 }

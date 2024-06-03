@@ -15,12 +15,17 @@ public class OrderDeliverySQLController {
     private OrderDeliverySQLService orderDeliverySQLService;
 
     @GetMapping("/{xdate}")
-    public ResponseEntity<List<String>> getOrderDeliveryByDeliveryDate(@PathVariable String xdate) {
-        return new ResponseEntity<List<String>>(orderDeliverySQLService.getOrderDeliveryByDeliveryDate(xdate), HttpStatus.OK);
+    public ResponseEntity<String> getOrderDeliveryByDeliveryDate(@PathVariable String xdate) {
+        return new ResponseEntity<String>(orderDeliverySQLService.getOrderDeliveryByDeliveryDate(xdate), HttpStatus.OK);
     }
 
     @GetMapping("/byOrderID/{orderID}")
     public ResponseEntity<String> getOrderDeliveryByOrderID(@PathVariable String orderID) {
         return new ResponseEntity<String>(orderDeliverySQLService.getOrderDeliveryByOrderID(orderID), HttpStatus.OK);
+    }
+
+    @GetMapping("/byId/{id}")
+    public ResponseEntity<String> getOrderDeliveryById(@PathVariable String id) {
+        return new ResponseEntity<String>(orderDeliverySQLService.getOrderDeliveryById(id), HttpStatus.OK);
     }
 }

@@ -43,7 +43,11 @@ public class MeasurementController {
 
     @GetMapping("/byNameStr/{query}")
     public ResponseEntity<List<MeasurementForSelect>> getMeasurementContainingQuery(@PathVariable String query) {
-        return new ResponseEntity<List<MeasurementForSelect>>(measurementService.getMeasurementContainingQuery(query), HttpStatus.OK);
+        if ("all".equalsIgnoreCase(query)) {
+            return new ResponseEntity<List<MeasurementForSelect>>(measurementService.getAllItemForSelect(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<List<MeasurementForSelect>>(measurementService.getMeasurementContainingQuery(query), HttpStatus.OK);
+        }
     }
 
     @GetMapping("/firstCall/{id}") //Kien

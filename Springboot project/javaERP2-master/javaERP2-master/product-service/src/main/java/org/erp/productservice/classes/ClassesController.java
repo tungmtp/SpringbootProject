@@ -44,12 +44,17 @@ public class ClassesController {
 
     @GetMapping("/byNameStr/{query}")
     public ResponseEntity<List<ClassForSelect>> getMeasurementContainingQuery(@PathVariable String query) {
-        return new ResponseEntity<List<ClassForSelect>>(ClassesService.getMeasurementContainingQuery(query), HttpStatus.OK);
+        if ("all".equalsIgnoreCase(query)) {
+            return new ResponseEntity<List<ClassForSelect>>(ClassesService.getClassFamiliar(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<List<ClassForSelect>>(ClassesService.getClassContainingQuery(query), HttpStatus.OK);
+        }
+
     }
 
     @GetMapping("/firstCall/{id}") //Kien
     public ResponseEntity<List<ClassForSelect>> getMeasurementFamiliar(@PathVariable UUID id) {
-        return new ResponseEntity<List<ClassForSelect>>(ClassesService.getMeasurementFamiliar(id), HttpStatus.OK);
+        return new ResponseEntity<List<ClassForSelect>>(ClassesService.getClassFamiliar(), HttpStatus.OK);
     }
 
     @GetMapping("/oneForSelect/{id}")

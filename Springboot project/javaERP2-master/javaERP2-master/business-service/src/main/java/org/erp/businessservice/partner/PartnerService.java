@@ -62,4 +62,8 @@ public class PartnerService {
     public List<PartnerForSelect> getItemFamiliar(UUID uuid) {
         return partnerRepository.getItemFamiliar(uuid);
     }
+
+    public List<PartnerForSelect> getAllItemForSelect() {
+        return partnerRepository.getAllItemForSelect();
+    }
 }

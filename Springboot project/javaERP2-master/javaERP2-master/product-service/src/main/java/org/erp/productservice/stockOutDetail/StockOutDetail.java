@@ -1,4 +1,5 @@
 package org.erp.productservice.stockOutDetail;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -48,7 +49,7 @@ public class StockOutDetail {
     @Column(name = "price", nullable = false)
     private Float price;
 
-    @Column(name = "VAT", nullable = false)
+    @Column(name = "vat", nullable = false)
     private Float vat;
 
     @Column(name = "priceType", columnDefinition = "tinyint")

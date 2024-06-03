@@ -18,4 +18,7 @@ public interface MeasurementRepository extends JpaRepository<Measurement, UUID> 
 
     @Query(value = "select new org.erp.productservice.measurement.MeasurementForSelect(Id, MeasName) from Measurement where MeasCatId = (Select MeasCatId from Measurement where Id = :query)")
     List<MeasurementForSelect> getMeasurementFamiliar(@Param("query") UUID measID);
+
+    @Query(value = "SELECT new org.erp.productservice.measurement.MeasurementForSelect(Id, MeasName) FROM Measurement ")
+    List<MeasurementForSelect> getAllItemForSelect();
 }

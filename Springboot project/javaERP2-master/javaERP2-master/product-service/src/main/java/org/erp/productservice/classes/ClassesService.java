@@ -12,22 +12,22 @@ import java.util.stream.Collectors;
 @Service
 public class ClassesService {
     @Autowired
-    private ClassesRepository ClassesRepository;
+    private ClassesRepository classesRepository;
 
     public List<Classes> allClasses() {
-        return ClassesRepository.findAll();
+        return classesRepository.findAll();
     }
 
     public Classes singleClass(UUID id) {
-        return ClassesRepository.findById(id).orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm này"));
+        return classesRepository.findById(id).orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm này"));
     }
 
     public Classes createClass(Classes ProductAttribute) {
-        return ClassesRepository.save(ProductAttribute);
+        return classesRepository.save(ProductAttribute);
     }
 
     public Classes updateClass(UUID id, Classes Classes) {
-        Classes currentClasses = ClassesRepository.findById(id).orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm này"));
+        Classes currentClasses = classesRepository.findById(id).orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm này"));
         if (currentClasses != null) {
             if ((Classes.getNameStr() != null) && (!"".equalsIgnoreCase(Classes.getNameStr()))) {
                 currentClasses.setNameStr(Classes.getNameStr());
@@ -36,23 +36,20 @@ public class ClassesService {
                 currentClasses.setClassType(Classes.getClassType());
             }
 
-            return ClassesRepository.save(currentClasses);
+            return classesRepository.save(currentClasses);
         }
         return null;
     }
 
     public void deleteClass(UUID id) {
-        ClassesRepository.deleteById(id);
+        classesRepository.deleteById(id);
     }
 
-    public List<ClassForSelect> getMeasurementContainingQuery(String query) {
-        return ClassesRepository.getMeasurementContainingQuery(query);
+    public List<ClassForSelect> getClassContainingQuery(String query) {
+        return classesRepository.getClassContainingQuery(query);
     }
 
-    public List<ClassForSelect> getMeasurementFamiliar(UUID measID) {
-        return ClassesRepository.getClassFamiliar();
-//        return results.stream()
-//                .map(result -> new ClassForSelect(UUID.fromString((String) result[0]), (String) result[1]))
-//                .collect(Collectors.toList());
+    public List<ClassForSelect> getClassFamiliar() {
+        return classesRepository.getClassFamiliar();
     }
 }

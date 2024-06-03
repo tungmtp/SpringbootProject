@@ -14,21 +14,22 @@ public class OrderDeliverySQLService {
     @Autowired
     private OrderDeliverySQLRepository orderDeliverySQLRepository;
 
-    public List<String> getOrderDeliveryByDeliveryDate(String mDate) {
-//        return orderDeliverySQLRepository.getOrderDeliveryWithPartner(mDate);
+    public String getOrderDeliveryByDeliveryDate(String mDate) {
+//        return orderDeliverySQLRepository.getOrderDeliveryByDeliveryDate(mDate);
         List<String> jsonResults = orderDeliverySQLRepository.getOrderDeliveryByDeliveryDate(mDate);
-        System.out.println(jsonResults);
+//        System.out.println(jsonResults);
         // Assuming the results are JSON strings, you can concatenate them or wrap them into a single JSON array.
-        return jsonResults;
+        return String.join(",", jsonResults);
     }
 
     public String getOrderDeliveryByOrderID(String orderID) {
+//        return orderDeliverySQLRepository.getOrderDeliveryByOrderID(orderID);
         List<String> jsonResults = orderDeliverySQLRepository.getOrderDeliveryByOrderID(orderID);
         // Assuming the results are JSON strings, you can concatenate them or wrap them into a single JSON array.
         return String.join(",", jsonResults);
     }
-//    private String productName;
-//    private Double quantity;
-//    private String measName;
-//    private Integer quality;
+
+    public String getOrderDeliveryById(String id) {
+        return orderDeliverySQLRepository.getOrderDeliveryById(id);
+    }
 }

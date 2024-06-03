@@ -16,9 +16,8 @@ import java.util.UUID;
 public interface ClassesRepository extends JpaRepository<Classes, UUID> {
     //    @Query(value = "SELECT new org.erp.productservice.classes.ClassForSelect(Id, nameStr) FROM dbo.classes WHERE nameStr like %:query%")
     @Query(value = "SELECT new org.erp.productservice.classes.ClassForSelect(Id, nameStr) FROM Classes WHERE nameStr like %:query%")
-    List<ClassForSelect> getMeasurementContainingQuery(@Param("query") String name);
+    List<ClassForSelect> getClassContainingQuery(@Param("query") String name);
 
     @Query(value = "SELECT new org.erp.productservice.classes.ClassForSelect(Id, nameStr) FROM Classes")
-//    List<Object[]> getClassFamiliar(@Param("query") UUID measID);
     List<ClassForSelect> getClassFamiliar();
 }

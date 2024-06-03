@@ -28,6 +28,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     @Autowired
     private JwtAuthFilter authFilter;
+
     @Bean
     public UserDetailsService userDetailsService() {
         return new UserInfoService();
@@ -47,7 +48,7 @@ public class SecurityConfig {
 //                .build();
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authCustomizer -> authCustomizer
-                        .requestMatchers("/auth/addUser", "/auth/generateToken","/rabbitMQ/events").permitAll()
+                        .requestMatchers("/auth/addUser", "/auth/generateToken", "/rabbitMQ/events", "/auth/sendMessage/orderDeliveryID").permitAll()
                         .requestMatchers("/**").authenticated()
                 )
                 .sessionManagement((sessionManagement) -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -55,6 +56,7 @@ public class SecurityConfig {
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -67,6 +69,7 @@ public class SecurityConfig {
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();

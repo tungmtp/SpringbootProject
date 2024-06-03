@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="discovery-server" />
         <module name="produce-service" />
+        <module name="common-module" />
         <module name="api-gateway" />
         <module name="product-service" />
         <module name="business-service" />
@@ -22,6 +23,7 @@
       <module name="api-gateway" options="-parameters" />
       <module name="api-getway" options="-parameters" />
       <module name="business-service" options="-parameters" />
+      <module name="common-module" options="-parameters" />
       <module name="discovery-server" options="-parameters" />
       <module name="employee-service" options="-parameters" />
       <module name="produce-service" options="-parameters" />

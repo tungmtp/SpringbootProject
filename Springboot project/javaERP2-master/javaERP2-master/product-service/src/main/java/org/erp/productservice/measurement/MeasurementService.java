@@ -67,4 +67,8 @@ public class MeasurementService {
     public List<MeasurementForSelect> getMeasurementFamiliar(UUID measID) {
         return MeasurementRepository.getMeasurementFamiliar(measID);
     }
+
+    public List<MeasurementForSelect> getAllItemForSelect() {
+        return MeasurementRepository.getAllItemForSelect();
+    }
 }

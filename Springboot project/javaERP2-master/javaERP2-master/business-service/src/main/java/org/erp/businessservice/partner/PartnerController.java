@@ -42,7 +42,11 @@ public class PartnerController {
 
     @GetMapping("/byNameStr/{query}")
     public ResponseEntity<List<PartnerForSelect>> getItemContainingQuery(@PathVariable String query) {
-        return new ResponseEntity<List<PartnerForSelect>>(partnerService.getItemContainingQuery(query), HttpStatus.OK);
+        if ("all".equalsIgnoreCase(query)) {
+            return new ResponseEntity<List<PartnerForSelect>>(partnerService.getAllItemForSelect(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<List<PartnerForSelect>>(partnerService.getItemContainingQuery(query), HttpStatus.OK);
+        }
     }
 
     @GetMapping("/firstCall/{id}")

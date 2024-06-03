@@ -1,10 +1,12 @@
 package org.erp.productservice.stockOut;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+
 @Service
 public class StockOutService {
     @Autowired
@@ -60,7 +62,7 @@ public class StockOutService {
         if (!Objects.equals(newStockOut.getNoidung(), currentStockOut.getNoidung())) {
             currentStockOut.setNoidung(newStockOut.getNoidung());
         }
-        if (newStockOut.getWarehouseID() != null) {
+        if (newStockOut.getWarehouseID() != 0) {
             currentStockOut.setWarehouseID(newStockOut.getWarehouseID());
         }
 

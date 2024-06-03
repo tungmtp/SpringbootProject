@@ -21,6 +21,7 @@
     <module>product-service</module>
       <module>produce-service</module>
       <module>business-service</module>
+      <module>common-module</module>
 
   </modules>
 

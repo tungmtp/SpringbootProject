@@ -17,4 +17,5 @@ public interface SegmentRepository extends JpaRepository<Segment, UUID> {
 
     @Query(value = "SELECT new org.erp.produceservice.segment.SegmentForSelect(Id, segmentName) FROM Segment")
     List<SegmentForSelect> getItemFamiliar();
+
 }
