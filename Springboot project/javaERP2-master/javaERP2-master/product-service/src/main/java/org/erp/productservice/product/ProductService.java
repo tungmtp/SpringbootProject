@@ -3,6 +3,7 @@ package org.erp.productservice.product;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -131,5 +132,28 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    public String physicalStock(String productId, String measId, String dateCheck) {
+        List<String> results = productRepository.physicalStock(productId, measId, dateCheck);
+        return String.join("", results);
+    }
 
+    public String allProductInOneWarehouse(int warehouseId, String fromDate, String toDate, int quality) {
+        List<String> results = productRepository.allProductInOneWarehouse(warehouseId, fromDate, toDate, quality);
+        return String.join("", results);
+    }
+
+    public String getInOutOneProductAtOneWarehouse(int warehouseId, String fromDate, String toDate, String productId) {
+        List<String> results = productRepository.getInOutOneProductAtOneWarehouse(warehouseId, fromDate, toDate, productId);
+        return String.join("", results);
+    }
+
+    public String oneProductAtAllWarehouse(UUID productID, String lastDate) {
+        List<String> results = productRepository.oneProductAtAllWarehouse(productID, lastDate);
+        return String.join("", results);
+    }
+
+    String allProductByAttrAtAllWarehouse(String productAttrId, String lastDate) {
+        List<String> results = productRepository.allProductByAttrAtAllWarehouse(productAttrId, lastDate);
+        return String.join("", results);
+    }
 }

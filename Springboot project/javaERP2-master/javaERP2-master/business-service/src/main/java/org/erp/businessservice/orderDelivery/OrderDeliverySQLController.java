@@ -28,4 +28,13 @@ public class OrderDeliverySQLController {
     public ResponseEntity<String> getOrderDeliveryById(@PathVariable String id) {
         return new ResponseEntity<String>(orderDeliverySQLService.getOrderDeliveryById(id), HttpStatus.OK);
     }
+
+    @GetMapping("/byId2/{id}")
+    public ResponseEntity<String> getOrderDeliveryById2(@PathVariable String id) {
+        String result = orderDeliverySQLService.getOrderDeliveryById2(id);
+        if (result == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 }

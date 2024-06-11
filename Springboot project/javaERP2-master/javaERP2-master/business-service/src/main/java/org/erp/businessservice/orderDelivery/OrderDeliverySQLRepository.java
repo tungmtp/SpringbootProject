@@ -59,5 +59,18 @@ public interface OrderDeliverySQLRepository extends JpaRepository<OrderDelivery,
                 INNER JOIN Partner cc ON bb.partnersID = cc.id\s
                 WHERE aa.id = :id FOR JSON PATH\s
             """, nativeQuery = true)
-    String getOrderDeliveryById(@Param("id") String id);
+    List<String> getOrderDeliveryById(@Param("id") String id);
+
+    @Query(value = """ 
+            select aa.*, bb.partnersID, cc.nameStr AS partnerName, bb.projectID, \s
+                deliveryDetail = (SELECT OrderDeliveryDetail.*, Product.nameStr as productName, Measurement.MeasName, Measurement.RateInRoot\s
+                                                                   FROM OrderDeliveryDetail\s
+                                                                   INNER JOIN Product ON OrderDeliveryDetail.productID = Product.Id\s
+                                                                   INNER JOIN Measurement ON OrderDeliveryDetail.measID = Measurement.Id WHERE OrderDeliveryDetail.orderDeliveryID = aa.id FOR JSON PATH) \s
+                from OrderDelivery aa\s
+                INNER JOIN Orders bb ON aa.orderID = bb.id\s
+                INNER JOIN Partner cc ON bb.partnersID = cc.id\s
+                WHERE aa.id = :id FOR JSON PATH\s
+            """, nativeQuery = true)
+    List<String> getOrderDeliveryById2(@Param("id") String id);
 }

@@ -24,7 +24,7 @@ public class BomService {
             }
 
             if (bom.getQuantity() != null) {
-                currBom.setQuantity(currBom.getQuantity());
+                currBom.setQuantity(bom.getQuantity());
             }
 
             if (bom.getMeasId() != null) {
@@ -63,6 +63,10 @@ public class BomService {
                 (String) result[5],
                 (String) result[6]
         )).collect(Collectors.toList());
+    }
+
+    public void deleteBOMById(UUID id) {
+        bomRepository.deleteById(id);
     }
 
 }

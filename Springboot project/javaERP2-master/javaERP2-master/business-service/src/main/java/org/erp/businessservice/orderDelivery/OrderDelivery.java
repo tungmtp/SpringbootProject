@@ -51,4 +51,7 @@ public class OrderDelivery {
     @Column(name = "paymentDate")
     @Temporal(TemporalType.DATE)
     private Date paymentDate;
+
+    @Column(name = "inProcess")
+    private boolean inProcess = false;
 }

@@ -28,9 +28,9 @@ public class OrdersProduceService {
         OrdersProduce existingOrdersProduce = ordersProduceRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("OrdersProduce not found with id: " + id));
 
-        if (updatedOrdersProduce.getOrdersID() != null && !existingOrdersProduce.getOrdersID().equals(updatedOrdersProduce.getOrdersID())) {
-            existingOrdersProduce.setOrdersID(updatedOrdersProduce.getOrdersID());
-        }
+//        if (updatedOrdersProduce.getOrdersID() != null && !existingOrdersProduce.getOrdersID().equals(updatedOrdersProduce.getOrdersID())) {
+//            existingOrdersProduce.setOrdersID(updatedOrdersProduce.getOrdersID());
+//        }
 
         if (updatedOrdersProduce.getOrderDetailID() != null && !existingOrdersProduce.getOrderDetailID().equals(updatedOrdersProduce.getOrderDetailID())) {
             existingOrdersProduce.setOrderDetailID(updatedOrdersProduce.getOrderDetailID());
@@ -44,9 +44,9 @@ public class OrdersProduceService {
             existingOrdersProduce.setReqDate(updatedOrdersProduce.getReqDate());
         }
 
-        if (updatedOrdersProduce.getComment() != null && !existingOrdersProduce.getComment().equals(updatedOrdersProduce.getComment())) {
-            existingOrdersProduce.setComment(updatedOrdersProduce.getComment());
-        }
+//        if (updatedOrdersProduce.getComment() != null && !existingOrdersProduce.getComment().equals(updatedOrdersProduce.getComment())) {
+//            existingOrdersProduce.setComment(updatedOrdersProduce.getComment());
+//        }
 
         if (updatedOrdersProduce.isGenerated() != existingOrdersProduce.isGenerated()) {
             existingOrdersProduce.setGenerated(updatedOrdersProduce.isGenerated());
@@ -61,5 +61,20 @@ public class OrdersProduceService {
 
     public void deleteOrdersProduce(UUID id) {
         ordersProduceRepository.deleteById(id);
+    }
+
+    public String orderRequestSumary(UUID uuid) {
+        List<String> results = ordersProduceRepository.orderRequestSumary(uuid);
+        return String.join("", results);
+    }
+
+    public String orderRequestDistinctDate(UUID uuid) {
+        List<String> results = ordersProduceRepository.orderRequestDistinctDate(uuid);
+        return String.join("", results);
+    }
+
+    public String getOrderRequestByOrderIdAndDate(UUID uuid, String mDate) {
+        List<String> results = ordersProduceRepository.getOrderRequestByOrderIdAndDate(uuid, mDate);
+        return String.join("", results);
     }
 }

@@ -1,5 +1,6 @@
 package org.erp.productservice.stockOut;
 
+import org.erp.productservice.stockIn.StockIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,5 +73,15 @@ public class StockOutService {
 
     public void deleteStockOut(UUID id) {
         stockOutRepository.deleteById(id);
+    }
+
+    public List<StockOut> getStockOutByDate(String startDate, String endDate) {
+        return stockOutRepository.getStockOutByDate(startDate, endDate);
+    }
+
+    public String getStockOutDetailByStockOutID(String stockOutID) {
+        List<String> jsonResults = stockOutRepository.getStockOutDetailByStockOutID(stockOutID);
+//        System.out.println(jsonResults);
+        return String.join("", jsonResults);
     }
 }

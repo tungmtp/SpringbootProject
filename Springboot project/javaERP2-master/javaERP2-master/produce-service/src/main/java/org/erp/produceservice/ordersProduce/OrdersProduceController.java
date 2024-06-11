@@ -39,4 +39,33 @@ public class OrdersProduceController {
         ordersProduceService.deleteOrdersProduce(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/orderRequestSumary/{id}")
+    public ResponseEntity<String> orderRequestSumary(@PathVariable UUID id) {
+        String result = ordersProduceService.orderRequestSumary(id);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @PostMapping("/addlist")
+    public ResponseEntity<String> insertListOrderProduce(@RequestBody List<OrdersProduce> mlist) {
+        int mCount = 0;
+
+        for (OrdersProduce mm : mlist) {
+            ordersProduceService.createOrdersProduce(mm);
+            mCount++;
+        }
+        return new ResponseEntity<>(String.valueOf(mCount), HttpStatus.OK);
+    }
+
+    @GetMapping("/orderRequestDistinctDate/{id}")
+    public ResponseEntity<String> orderRequestDistinctDate(@PathVariable UUID id) {
+        String result = ordersProduceService.orderRequestDistinctDate(id);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/getOrderRequestByOrderIdAndDate/{id}/{mDate}")
+    public ResponseEntity<String> getOrderRequestByOrderId(@PathVariable UUID id, @PathVariable String mDate) {
+        String result = ordersProduceService.getOrderRequestByOrderIdAndDate(id, mDate);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 }

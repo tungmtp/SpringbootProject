@@ -20,8 +20,8 @@ public class OrdersProduce {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(name = "OrdersID", nullable = false)
-    private UUID ordersID;
+//    @Column(name = "OrdersID", nullable = false)
+//    private UUID ordersID;
 
     @Column(name = "OrderDetailID", nullable = false)
     private UUID orderDetailID;
@@ -33,8 +33,8 @@ public class OrdersProduce {
     @Temporal(TemporalType.DATE)
     private Date reqDate;
 
-    @Column(name = "Comment", columnDefinition = "ntext")
-    private String comment;
+//    @Column(name = "Comment", columnDefinition = "ntext")
+//    private String comment;
 
     @Column(name = "Generated")
     private boolean generated = false;

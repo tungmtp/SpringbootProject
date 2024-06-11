@@ -1,4 +1,5 @@
 package org.erp.productservice.stockIn;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -52,5 +53,5 @@ public class StockIn {
     private String noidung;
 
     @Column(name = "warehouseID", nullable = false)
-    private UUID warehouseID;
+    private Integer warehouseID;
 }

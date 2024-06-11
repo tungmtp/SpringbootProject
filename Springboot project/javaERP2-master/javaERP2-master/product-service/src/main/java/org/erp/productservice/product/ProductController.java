@@ -107,4 +107,33 @@ public class ProductController {
         return new ResponseEntity<List<ProductBom>>(productService.getProductMayBeProduce(), HttpStatus.OK);
     }
 
+    @GetMapping("/physicalStock/{productId}/{measId}/{dateCheck}")
+    public ResponseEntity<String> physicalStock(@PathVariable String productId, @PathVariable String measId, @PathVariable String dateCheck) {
+        return new ResponseEntity<>(productService.physicalStock(productId, measId, dateCheck), HttpStatus.OK);
+    }
+
+    @GetMapping("/allProductInOneWarehouse/{warehouseId}/{fromDate}/{toDate}/{quality}")
+    public ResponseEntity<String> allProductInOneWarehouse(@PathVariable int warehouseId, @PathVariable String fromDate, @PathVariable String toDate, @PathVariable int quality) {
+        return new ResponseEntity<>(productService.allProductInOneWarehouse(warehouseId, fromDate, toDate, quality), HttpStatus.OK);
+    }
+
+    @GetMapping("/getInOutOneProductAtOneWarehouse/{warehouseId}/{fromDate}/{toDate}/{productId}")
+    public ResponseEntity<String> getInOutOneProductAtOneWarehouse(
+            @PathVariable int warehouseId,
+            @PathVariable String fromDate,
+            @PathVariable String toDate,
+            @PathVariable String productId
+    ) {
+        return new ResponseEntity<>(productService.getInOutOneProductAtOneWarehouse(warehouseId, fromDate, toDate, productId), HttpStatus.OK);
+    }
+
+    @GetMapping("/oneProductAtAllWarehouse/{productID}/{lastDate}")
+    public ResponseEntity<String> getInOutOneProductAtOneWarehouse(@PathVariable UUID productID, @PathVariable String lastDate) {
+        return new ResponseEntity<>(productService.oneProductAtAllWarehouse(productID, lastDate), HttpStatus.OK);
+    }
+
+    @GetMapping("/allProductByAttrAtAllWarehouse/{productAttrId}/{lastDate}")
+    public ResponseEntity<String> allProductByAttrAtAllWarehouse(@PathVariable String productAttrId, @PathVariable String lastDate) {
+        return new ResponseEntity<>(productService.allProductByAttrAtAllWarehouse(productAttrId, lastDate), HttpStatus.OK);
+    }
 }

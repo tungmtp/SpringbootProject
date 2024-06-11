@@ -47,4 +47,24 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 
     @Query(value = "select Id, nameStr, ISNULL(mCount, 0) from ProductBOM", nativeQuery = true)
     List<Object[]> getProductMayBeProduce();
+
+    @Query(value = "select dbo.PhysicalStock(:productId, :measId, :dateCheck) AS tonkho FOR JSON PATH", nativeQuery = true)
+    List<String> physicalStock(@Param("productId") String productId, @Param("measId") String measId, @Param("dateCheck") String dateCheck);
+
+
+    @Query(value = "select * FROM dbo.AllProductInOneWarehouse(:warehouseId, :fromDate, :toDate, :quality) order by ExtraCategoryID, NameStr FOR JSON PATH", nativeQuery = true)
+    List<String> allProductInOneWarehouse(@Param("warehouseId") int warehouseId, @Param("fromDate") String fromDate, @Param("toDate") String toDate, @Param("quality") int quality);
+
+    //SELECT * FROM dbo.GetInOutOneProductAtOneWarehouse(2, '2024-06-01', '2024-08-15', 'FC464B7B-8264-4E98-A191-5096B419B5ED') ORDER BY ngayXN, mOrder FOR JSON PATH
+    @Query(value = "select * FROM dbo.GetInOutOneProductAtOneWarehouse(:warehouseId, :fromDate, :toDate, :productId) ORDER BY ngayXN, mOrder FOR JSON PATH", nativeQuery = true)
+    List<String> getInOutOneProductAtOneWarehouse(@Param("warehouseId") int warehouseId,
+                                                  @Param("fromDate") String fromDate,
+                                                  @Param("toDate") String toDate,
+                                                  @Param("productId") String productId);
+
+    @Query(value = "select * FROM dbo.OneProductAtAllWarehouse(:productID, :lastDate) FOR JSON PATH", nativeQuery = true)
+    List<String> oneProductAtAllWarehouse(@Param("productID") UUID productId, @Param("lastDate") String fromDate);
+
+    @Query(value = "SELECT * FROM dbo.AllProducByAttrAtAllWarehouse(:productAttrID, :lastDate) FOR JSON PATH", nativeQuery = true)
+    List<String> allProductByAttrAtAllWarehouse(@Param("productAttrID") String productAttrId, @Param("lastDate") String lastDate);
 }

@@ -41,4 +41,6 @@ public class OrderDeliveryDetail {
 
     @Column(name = "VAT")
     private Float vat;
+    @Column(name = "orderProduceID")
+    private UUID orderProduceID;
 }

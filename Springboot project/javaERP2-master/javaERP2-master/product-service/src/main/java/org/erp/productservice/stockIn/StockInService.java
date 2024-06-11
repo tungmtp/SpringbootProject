@@ -1,10 +1,13 @@
 package org.erp.productservice.stockIn;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+
 @Service
 public class StockInService {
     @Autowired
@@ -70,5 +73,15 @@ public class StockInService {
 
     public void deleteStockIn(UUID id) {
         stockInRepository.deleteById(id);
+    }
+
+    public List<StockIn> getStockInByDate(String startDate, String endDate) {
+        return stockInRepository.getStockInByDate(startDate, endDate);
+    }
+
+    public String getStockInDetailByStockInID(String stockInID) {
+        List<String> jsonResults = stockInRepository.getStockInDetailByStockInID(stockInID);
+//        System.out.println(jsonResults);
+        return String.join("", jsonResults);
     }
 }

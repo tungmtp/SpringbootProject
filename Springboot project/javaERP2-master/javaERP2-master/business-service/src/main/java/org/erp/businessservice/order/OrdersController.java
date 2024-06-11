@@ -64,18 +64,4 @@ public class OrdersController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/sendMessage/orderDeliveryID")
-    public ResponseEntity<String> sendMessage(@RequestBody String message, @RequestHeader("UserName") String userName) {
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("RequestType", "SENDMESSAGE_orderDeliveryID");
-        headers.add("UserName", userName);
-        ResponseEntity<String> response = ResponseEntity.status(HttpStatus.OK)
-                .headers(headers)
-                .body(message);
-        System.out.println("UserName: " + userName);
-        // Gửi message đến RabbitMQ
-        rabbitTemplate.convertAndSend("javaguides_exchange", "javaguides_routing_key", response);
-        return response;
-    }
-
 }

@@ -38,4 +38,9 @@ public class BomController {
     public ResponseEntity<List<BomInputByBomId>> getInputByBomId(@PathVariable UUID id) {
         return new ResponseEntity<List<BomInputByBomId>>(bomService.getInputByBomId(id), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteBOMById(@PathVariable UUID id) {
+        bomService.deleteBOMById(id);
+    }
 }
