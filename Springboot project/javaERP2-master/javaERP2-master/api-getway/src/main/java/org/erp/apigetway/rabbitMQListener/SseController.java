@@ -17,9 +17,10 @@ public class SseController {
     private EventListener eventListener;
 
     @GetMapping("/events")
-       public Flux<ServerSentEvent<String>> streamEvents() {
+    public Flux<ServerSentEvent<String>> streamEvents() {
         return Flux.create(emitter -> {
-            eventListener.registerEventSink((emitter));
+            eventListener.registerEventSink(emitter);
+            emitter.onDispose(() -> eventListener.removeEventSink(emitter));
         }, FluxSink.OverflowStrategy.LATEST).map(e -> ServerSentEvent.<String>builder((String) e).build());
     }
 }

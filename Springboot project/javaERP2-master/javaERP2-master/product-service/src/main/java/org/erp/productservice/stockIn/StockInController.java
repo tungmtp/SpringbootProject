@@ -53,4 +53,9 @@ public class StockInController {
     public ResponseEntity<String> getStockInDetailByStockInID(@PathVariable String stockInID) {
         return new ResponseEntity<String>(stockInService.getStockInDetailByStockInID(stockInID), HttpStatus.OK);
     }
+
+    @GetMapping("/findByRelatedTableAndRelatedID/{relatedTable}/{relatedID}")
+    public ResponseEntity<StockIn> findByRelatedTableAndRelatedID(@PathVariable String relatedTable, @PathVariable UUID relatedID) {
+        return new ResponseEntity<>(stockInService.findByRelatedTableAndRelatedID(relatedTable, relatedID), HttpStatus.OK);
+    }
 }

@@ -84,4 +84,8 @@ public class StockOutService {
 //        System.out.println(jsonResults);
         return String.join("", jsonResults);
     }
+
+    public List<StockOut> getStockOutBetweenWarehouses(String startDate, String endDate, int warehouseID) {
+        return stockOutRepository.getStockOutBetweenWareHouses(startDate, endDate, warehouseID);
+    }
 }

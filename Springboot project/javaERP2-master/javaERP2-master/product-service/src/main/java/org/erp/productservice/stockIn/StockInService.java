@@ -84,4 +84,8 @@ public class StockInService {
 //        System.out.println(jsonResults);
         return String.join("", jsonResults);
     }
+
+    public StockIn findByRelatedTableAndRelatedID(String relatedTable, UUID relatedID) {
+        return stockInRepository.findByRelatedTableAndRelatedID(relatedTable, relatedID);
+    }
 }

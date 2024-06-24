@@ -77,4 +77,9 @@ public class OrdersProduceService {
         List<String> results = ordersProduceRepository.getOrderRequestByOrderIdAndDate(uuid, mDate);
         return String.join("", results);
     }
+
+    public String getOrderRequestByOrderId(UUID uuid) {
+        List<String> results = ordersProduceRepository.getOrderRequestByOrderId(uuid);
+        return String.join("", results);
+    }
 }

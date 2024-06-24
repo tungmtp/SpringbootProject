@@ -22,4 +22,7 @@ public interface StockOutRepository extends JpaRepository<StockOut, UUID> {
              FROM StockOut WHERE StockOut.id = :stockOutID FOR JSON PATH
             """, nativeQuery = true)
     List<String> getStockOutDetailByStockOutID(@Param("stockOutID") String stockOutID);
+
+    @Query(value = "select * from StockOut where slipDate between :startDate and :endDate and purpose = 6 and shipTo = :warehouseID", nativeQuery = true)
+    List<StockOut> getStockOutBetweenWareHouses(@Param("startDate") String startDate, @Param("endDate") String endDate, @Param("warehouseID") int warehouseID);
 }

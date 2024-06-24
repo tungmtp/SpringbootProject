@@ -21,5 +21,7 @@ public interface StockInRepository extends JpaRepository<StockIn, UUID> {
              FROM StockIn WHERE StockIn.id = :stockInID FOR JSON PATH
             """, nativeQuery = true)
     List<String> getStockInDetailByStockInID(@Param("stockInID") String stockInID);
+
+    StockIn findByRelatedTableAndRelatedID(String relatedTable, UUID relatedID);
 }
 

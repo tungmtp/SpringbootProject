@@ -65,6 +65,12 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
     @Query(value = "select * FROM dbo.OneProductAtAllWarehouse(:productID, :lastDate) FOR JSON PATH", nativeQuery = true)
     List<String> oneProductAtAllWarehouse(@Param("productID") UUID productId, @Param("lastDate") String fromDate);
 
-    @Query(value = "SELECT * FROM dbo.AllProducByAttrAtAllWarehouse(:productAttrID, :lastDate) FOR JSON PATH", nativeQuery = true)
+    @Query(value = "SELECT * FROM dbo.AllProductByAttrAtAllWarehouse(:productAttrID, :lastDate) FOR JSON PATH", nativeQuery = true)
     List<String> allProductByAttrAtAllWarehouse(@Param("productAttrID") String productAttrId, @Param("lastDate") String lastDate);
+
+    @Query(value = "SELECT * FROM dbo.AllProductByClassAtAllWarehouse(:productClassID, :lastDate) FOR JSON PATH", nativeQuery = true)
+    List<String> allProductByClassAtAllWarehouse(@Param("productClassID") String productClassId, @Param("lastDate") String lastDate);
+
+    @Query(value = "SELECT COUNT(productId) AS mCount FROM dbo.inventoryLow()", nativeQuery = true)
+    Long getInventoryLowCount();
 }

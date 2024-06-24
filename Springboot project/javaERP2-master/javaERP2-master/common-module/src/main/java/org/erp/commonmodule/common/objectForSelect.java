@@ -1,4 +1,4 @@
-package org.erp.commonmodule;
+package org.erp.commonmodule.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

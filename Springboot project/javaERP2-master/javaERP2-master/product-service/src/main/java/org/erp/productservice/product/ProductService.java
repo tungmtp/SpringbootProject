@@ -2,8 +2,10 @@ package org.erp.productservice.product;
 
 
 import jakarta.transaction.Transactional;
+//import org.erp.apigetway.eventList.EventList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -152,8 +154,19 @@ public class ProductService {
         return String.join("", results);
     }
 
-    String allProductByAttrAtAllWarehouse(String productAttrId, String lastDate) {
+    public String allProductByAttrAtAllWarehouse(String productAttrId, String lastDate) {
         List<String> results = productRepository.allProductByAttrAtAllWarehouse(productAttrId, lastDate);
         return String.join("", results);
     }
+
+    public String allProductByClassAtAllWarehouse(String productClassId, String lastDate) {
+        List<String> results = productRepository.allProductByClassAtAllWarehouse(productClassId, lastDate);
+        return String.join("", results);
+    }
+
+    public Long getInventoryLowCount() {
+        return productRepository.getInventoryLowCount();
+    }
+
+
 }

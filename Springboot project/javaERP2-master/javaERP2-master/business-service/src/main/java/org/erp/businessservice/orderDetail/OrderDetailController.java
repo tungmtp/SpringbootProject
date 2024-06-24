@@ -41,9 +41,13 @@ public class OrderDetailController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/byOrderID/{id}")
-    public ResponseEntity<List<OrderDetail>> getByOrderID(@PathVariable UUID id) {
-        return new ResponseEntity<List<OrderDetail>>(OrderDetailService.getOrdersByOrderID(id), HttpStatus.OK);
+    @GetMapping("/BySchedule/{reqDate}")
+    public ResponseEntity<String> getDeliveryByShcedule(@PathVariable String reqDate) {
+        return new ResponseEntity<>(OrderDetailService.getDeliveryByShcedule(reqDate), HttpStatus.OK);
     }
 
+    @GetMapping("/byOrderID/{OrderID}")
+    public ResponseEntity<List<OrderDetail>> getOrderDetailByOrderID(@PathVariable UUID OrderID) {
+        return new ResponseEntity<List<OrderDetail>>(OrderDetailService.findByOrderID(OrderID), HttpStatus.OK);
+    }
 }

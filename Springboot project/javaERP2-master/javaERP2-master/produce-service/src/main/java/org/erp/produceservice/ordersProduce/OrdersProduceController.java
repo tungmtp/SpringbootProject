@@ -57,6 +57,17 @@ public class OrdersProduceController {
         return new ResponseEntity<>(String.valueOf(mCount), HttpStatus.OK);
     }
 
+    @PutMapping("/updatelist")
+    public ResponseEntity<String> updateListOrderProduce(@RequestBody List<OrdersProduce> mlist) {
+        int mCount = 0;
+
+        for (OrdersProduce mm : mlist) {
+            ordersProduceService.updateOrdersProduce(mm.getId(), mm);
+            mCount++;
+        }
+        return new ResponseEntity<>(String.valueOf(mCount), HttpStatus.OK);
+    }
+
     @GetMapping("/orderRequestDistinctDate/{id}")
     public ResponseEntity<String> orderRequestDistinctDate(@PathVariable UUID id) {
         String result = ordersProduceService.orderRequestDistinctDate(id);
@@ -64,8 +75,14 @@ public class OrdersProduceController {
     }
 
     @GetMapping("/getOrderRequestByOrderIdAndDate/{id}/{mDate}")
-    public ResponseEntity<String> getOrderRequestByOrderId(@PathVariable UUID id, @PathVariable String mDate) {
+    public ResponseEntity<String> getOrderRequestByOrderIdAndDate(@PathVariable UUID id, @PathVariable String mDate) {
         String result = ordersProduceService.getOrderRequestByOrderIdAndDate(id, mDate);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping("/getOrderRequestByOrderId/{id}")
+    public ResponseEntity<String> getOrderRequestByOrderId(@PathVariable UUID id) {
+        String result = ordersProduceService.getOrderRequestByOrderId(id);
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

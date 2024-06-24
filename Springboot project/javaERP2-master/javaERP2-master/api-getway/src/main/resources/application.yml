@@ -21,6 +21,10 @@ spring:
             uri: lb://business-service
             predicates:
               - Path=/business-service/**
+          - id: common-module
+            uri: lb://common-module
+            predicates:
+              - Path=/common-module/**
   datasource:
     url: jdbc:sqlserver://localhost:1499;databaseName=demo2;trustServerCertificate=true
     username: sa

@@ -136,4 +136,9 @@ public class ProductController {
     public ResponseEntity<String> allProductByAttrAtAllWarehouse(@PathVariable String productAttrId, @PathVariable String lastDate) {
         return new ResponseEntity<>(productService.allProductByAttrAtAllWarehouse(productAttrId, lastDate), HttpStatus.OK);
     }
+
+    @GetMapping("/allProductByClassAtAllWarehouse/{productClassId}/{lastDate}")
+    public ResponseEntity<String> allProductByClassAtAllWarehouse(@PathVariable String productClassId, @PathVariable String lastDate) {
+        return new ResponseEntity<>(productService.allProductByClassAtAllWarehouse(productClassId, lastDate), HttpStatus.OK);
+    }
 }

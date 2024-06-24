@@ -52,4 +52,11 @@ public class StockOutController {
     public ResponseEntity<String> getStockOutDetailByStockOutID(@PathVariable String stockOutID) {
         return new ResponseEntity<String>(stockOutService.getStockOutDetailByStockOutID(stockOutID), HttpStatus.OK);
     }
+
+    @GetMapping("/betweenWarehouses")
+    public ResponseEntity<List<StockOut>> getStockOutBetweenWarehouses(
+            @RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate, @RequestParam("warehouseID") int warehouseID) {
+        List<StockOut> stockOuts = stockOutService.getStockOutBetweenWarehouses(startDate, endDate, warehouseID);
+        return new ResponseEntity<>(stockOuts, HttpStatus.OK);
+    }
 }

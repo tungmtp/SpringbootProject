@@ -19,4 +19,7 @@ public interface OrdersProduceRepository extends JpaRepository<OrdersProduce, UU
 
     @Query(value = "SELECT * FROM dbo.getOrderRequestByOrderIdAndDate(:orderId, :mDate)  FOR JSON PATH", nativeQuery = true)
     List<String> getOrderRequestByOrderIdAndDate(@Param("orderId") UUID uuid, @Param("mDate") String mDate);
+
+    @Query(value = "SELECT * FROM dbo.getOrderRequestByOrderId(:orderId)  FOR JSON PATH", nativeQuery = true)
+    List<String> getOrderRequestByOrderId(@Param("orderId") UUID uuid);
 }
