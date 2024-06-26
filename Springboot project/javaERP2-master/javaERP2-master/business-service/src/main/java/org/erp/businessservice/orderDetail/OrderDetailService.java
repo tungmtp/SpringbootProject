@@ -74,8 +74,8 @@ public class OrderDetailService {
         OrderDetailRepository.deleteById(id);
     }
 
-    public String getDeliveryByShcedule(String reqDate) {
-        List<String> results = OrderDetailRepository.deliveryByShcedule(reqDate);
+    public String getDeliveryByShcedule(String reqDate, UUID orderID) {
+        List<String> results = OrderDetailRepository.deliveryByShcedule(reqDate, orderID);
         return String.join("", results);
     }
 

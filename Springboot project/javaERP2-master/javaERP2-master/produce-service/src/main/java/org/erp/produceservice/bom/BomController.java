@@ -43,4 +43,9 @@ public class BomController {
     public void deleteBOMById(@PathVariable UUID id) {
         bomService.deleteBOMById(id);
     }
+
+    @GetMapping("/extract/{productId}/{measId}/{reqDate}/{reqQuantity}")
+    public ResponseEntity<String> extractBom(@PathVariable String productId, @PathVariable String measId, @PathVariable String reqDate, @PathVariable Double reqQuantity) {
+        return new ResponseEntity<>(bomService.extractBom(productId, measId, reqDate, reqQuantity), HttpStatus.OK);
+    }
 }

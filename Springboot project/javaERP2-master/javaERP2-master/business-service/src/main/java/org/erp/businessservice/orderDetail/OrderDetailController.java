@@ -41,9 +41,9 @@ public class OrderDetailController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/BySchedule/{reqDate}")
-    public ResponseEntity<String> getDeliveryByShcedule(@PathVariable String reqDate) {
-        return new ResponseEntity<>(OrderDetailService.getDeliveryByShcedule(reqDate), HttpStatus.OK);
+    @GetMapping("/BySchedule/{reqDate}/{orderID}")
+    public ResponseEntity<String> getDeliveryByShcedule(@PathVariable String reqDate, @PathVariable UUID orderID) {
+        return new ResponseEntity<>(OrderDetailService.getDeliveryByShcedule(reqDate, orderID), HttpStatus.OK);
     }
 
     @GetMapping("/byOrderID/{OrderID}")

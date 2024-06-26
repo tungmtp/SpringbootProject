@@ -69,4 +69,9 @@ public class BomService {
         bomRepository.deleteById(id);
     }
 
+    public String extractBom(String productId, String measId, String reqDate, Double reqQuantity) {
+        List<String> results = bomRepository.extractBom(productId, measId, reqDate, reqQuantity);
+        return String.join("", results);
+    }
+
 }

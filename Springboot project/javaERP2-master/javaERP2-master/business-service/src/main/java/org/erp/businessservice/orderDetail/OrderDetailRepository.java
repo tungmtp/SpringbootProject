@@ -14,6 +14,6 @@ import java.util.UUID;
 public interface OrderDetailRepository extends JpaRepository<OrderDetail, UUID> {
     List<OrderDetail> findByOrderID(UUID orderID);
 
-    @Query(value = "SELECT * FROM dbo.deliveryByShcedule(:reqDate) FOR JSON PATH", nativeQuery = true)
-    List<String> deliveryByShcedule(@Param("reqDate") String reqDate);
+    @Query(value = "SELECT * FROM dbo.deliveryByShcedule(:reqDate, :orderID) FOR JSON PATH", nativeQuery = true)
+    List<String> deliveryByShcedule(@Param("reqDate") String reqDate, @Param("orderID") UUID orderID);
 }
