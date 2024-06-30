@@ -51,6 +51,21 @@ public class EventListController {
 
     }
 
+    @DeleteMapping("/byEventIdAndEventName/{eventName}/{id}")
+    public void deleteEventListByEventIdAndEventName(@PathVariable String id, @PathVariable String eventName, @RequestHeader("UserName") String userName) {
+        List<EventList> delEvent = eventListService.deleteEventByEventIdAndEventName(id, eventName);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("RequestType", "DELETE_EVENT");
+        headers.add("UserName", userName);
+
+        ResponseEntity<List<EventList>> response = ResponseEntity.status(HttpStatus.CREATED)
+                .headers(headers)
+                .body(delEvent);
+
+        rabbitTemplate.convertAndSend("javaguides_exchange", "javaguides_routing_key", response);
+
+    }
+
     @GetMapping("/{name}")
     public ResponseEntity<List<EventList>> findBuEventName(@PathVariable String name) {
         return new ResponseEntity<>(eventListService.findByEventName(name), HttpStatus.OK);
@@ -58,7 +73,7 @@ public class EventListController {
 
     @GetMapping("/inventoryLow")
     public ResponseEntity<String> inventoryLow() {
-        
+
         return new ResponseEntity<>(eventListService.inventoryLow(), HttpStatus.OK);
     }
 }

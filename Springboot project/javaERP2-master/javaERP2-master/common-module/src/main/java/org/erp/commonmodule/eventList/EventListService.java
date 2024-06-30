@@ -1,5 +1,6 @@
 package org.erp.commonmodule.eventList;
 
+import jakarta.transaction.Transactional;
 import jdk.jfr.Event;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,13 @@ public class EventListService {
         EventList delEvent = eventListRepository.findById(uuid)
                 .orElseThrow(() -> new RuntimeException("Khong tim thay ID nay: " + uuid.toString()));
         eventListRepository.deleteById(uuid);
+        return delEvent;
+    }
+
+    @Transactional
+    public List<EventList> deleteEventByEventIdAndEventName(String uuid, String eventName) {
+        List<EventList> delEvent = eventListRepository.findByEventIdAndEventName(uuid, eventName);
+        eventListRepository.deleteByEventIdAndEventName(uuid, eventName);
         return delEvent;
     }
 

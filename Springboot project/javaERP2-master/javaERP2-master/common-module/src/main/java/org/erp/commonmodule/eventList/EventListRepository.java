@@ -15,4 +15,8 @@ public interface EventListRepository extends JpaRepository<EventList, UUID> {
     List<String> inventoryLow();
 
     List<EventList> findByEventName(String name);
+
+    List<EventList> findByEventIdAndEventName(String eventId, String eventName);
+
+    void deleteByEventIdAndEventName(String eventId, String eventName);
 }

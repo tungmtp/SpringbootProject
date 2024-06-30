@@ -39,5 +39,5 @@ public class EventList {
     @Column(name = "createdBy", columnDefinition = "varchar(100)")
     private String createdBy;
     @Column(name = "createdOn")
-    private Timestamp createdOn;
+    private Timestamp createdOn = new Timestamp(System.currentTimeMillis());
 }

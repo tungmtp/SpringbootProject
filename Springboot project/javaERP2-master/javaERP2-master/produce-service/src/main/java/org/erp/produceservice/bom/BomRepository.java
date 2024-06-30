@@ -21,7 +21,7 @@ public interface BomRepository extends JpaRepository<Bom, UUID> {
     List<Object[]> getInputOfBomId(@Param("bomID") UUID bomID);
 
     @Query(value = """
-            Select aa.*, bb.nameStr AS productName, cc.MeasName, dd.segmentName \s
+            Select NEWID() AS id, aa.*, bb.nameStr AS productName, cc.MeasName, dd.segmentName \s
             from dbo.ExtractBom(:productId, :measId, :reqDate, :reqQuantity) aa
             INNER JOIN Product bb ON aa.productID = bb.Id\s
             INNER JOIN Measurement cc ON aa.measID = cc.Id
