@@ -41,4 +41,10 @@ public class OrderDeliverySQLService {
 //        return results.get(0);
         return String.join("", results);
     }
+
+    public String getDeliveryByReqDateOfOrder(String orderID, String reqDate) {
+        List<String> results = orderDeliverySQLRepository.getDeliveryByReqDateOfOrder(orderID, reqDate);
+        if (results.isEmpty()) return null;
+        return String.join("", results);
+    }
 }

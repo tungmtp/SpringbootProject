@@ -27,7 +27,8 @@ public interface OrderDeliverySQLRepository extends JpaRepository<OrderDelivery,
                 deliveryDetail = (SELECT OrderDeliveryDetail.*, Product.nameStr as productName, Measurement.MeasName\s
                                                                    FROM OrderDeliveryDetail\s
                                                                    INNER JOIN Product ON OrderDeliveryDetail.productID = Product.Id\s
-                                                                   INNER JOIN Measurement ON OrderDeliveryDetail.measID = Measurement.Id WHERE OrderDeliveryDetail.orderDeliveryID = aa.id FOR JSON PATH) \s
+                                                                   INNER JOIN Measurement ON OrderDeliveryDetail.measID = Measurement.Id \s
+                                                                   WHERE OrderDeliveryDetail.orderDeliveryID = aa.id FOR JSON PATH) \s
                 from OrderDelivery aa\s
                 INNER JOIN Orders bb ON aa.orderID = bb.id\s
                 INNER JOIN Partner cc ON bb.partnersID = cc.id\s
@@ -73,4 +74,7 @@ public interface OrderDeliverySQLRepository extends JpaRepository<OrderDelivery,
                 WHERE aa.id = :id FOR JSON PATH\s
             """, nativeQuery = true)
     List<String> getOrderDeliveryById2(@Param("id") String id);
+
+    @Query(value = "SELECT * FROM dbo.getDeliveryByReqDateOfOrder(:orderID, :reqDate) FOR JSON PATH", nativeQuery = true)
+    List<String> getDeliveryByReqDateOfOrder(@Param("orderID") String orderID, @Param("reqDate") String reqDate);
 }

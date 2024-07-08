@@ -66,7 +66,8 @@ public class OrderDeliveryService {
         return orderDeliveryRepository.save(existingOrderDelivery);
     }
 
-    public void deleteOrderDelivery(UUID id) {
+    public UUID deleteOrderDelivery(UUID id) {
         orderDeliveryRepository.deleteById(id);
+        return id;
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface StockInRepository extends JpaRepository<StockIn, UUID> {
-    @Query(value = "select * from StockIn where slipDate between :startDate and :endDate", nativeQuery = true)
+    @Query(value = "select * from StockIn where CAST(slipDate AS DATE) between :startDate and :endDate", nativeQuery = true)
     List<StockIn> getStockInByDate(@Param("startDate") String startDate, @Param("endDate") String endDate);
 
     @Query(value = """ 

@@ -39,9 +39,21 @@ public class OrderDeliveryController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteOrderDelivery(@PathVariable UUID id) {
-        orderDeliveryService.deleteOrderDelivery(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<?> deleteOrderDelivery(@PathVariable UUID id, @RequestHeader("UserName") String userName) {
+//        orderDeliveryService.deleteOrderDelivery(id);
+//        return ResponseEntity.ok().build();
+        UUID deletedOrderDelivery = orderDeliveryService.deleteOrderDelivery(id);
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("RequestType", "DELETE_ORDER_DELIVERY");
+        headers.add("UserName", userName);
+        ResponseEntity<UUID> response = ResponseEntity.status(HttpStatus.OK)
+                .headers(headers)
+                .body(deletedOrderDelivery);
+
+        // Gửi message đến RabbitMQ
+        rabbitTemplate.convertAndSend("javaguides_exchange", "javaguides_routing_key", response);
+        return response;
+
     }
 
 

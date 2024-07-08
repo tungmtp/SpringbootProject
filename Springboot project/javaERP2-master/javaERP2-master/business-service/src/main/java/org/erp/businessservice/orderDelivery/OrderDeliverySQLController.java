@@ -37,4 +37,11 @@ public class OrderDeliverySQLController {
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
+    @GetMapping("/getDeliveryByReqDateOfOrder/{orderID}/{reqDate}")
+    public ResponseEntity<String> getDeliveryByReqDateOfOrder(@PathVariable String orderID, @PathVariable String reqDate) {
+        String result = orderDeliverySQLService.getDeliveryByReqDateOfOrder(orderID, reqDate);
+        if (result == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 }
